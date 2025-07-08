@@ -2,6 +2,7 @@ package com.ubb.eventappbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "grupo")
@@ -27,4 +28,10 @@ public class Group {
     @ManyToOne
     @JoinColumn(name = "id_campus")
     private Campus campus;
+
+    @ManyToMany
+    @JoinTable(name = "grupo_tag",
+            joinColumns = @JoinColumn(name = "id_grupo"),
+            inverseJoinColumns = @JoinColumn(name = "id_tag"))
+    private Set<Tag> tags;
 }
