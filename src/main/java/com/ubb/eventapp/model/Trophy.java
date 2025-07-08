@@ -18,4 +18,7 @@ public class Trophy {
 
     @Column(length = 80, unique = true)
     private String nombre;
+
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
 }
