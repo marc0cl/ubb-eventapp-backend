@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public ProfileSummary getProfileSummary(String userId) {
+        User user = userRepository.findById(userId).orElseThrow();
         long friendCount = friendshipRepository
                 .findByUserIdAndEstado(userId, FriendshipState.ACEPTADA)
                 .size();
@@ -61,6 +62,7 @@ public class UserServiceImpl implements UserService {
                 .toList();
 
         return ProfileSummary.builder()
+                .username(user.getUsername())
                 .friendsCount(friendCount)
                 .trophies(trophies)
                 .build();

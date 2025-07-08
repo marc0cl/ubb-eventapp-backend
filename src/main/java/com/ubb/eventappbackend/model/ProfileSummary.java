@@ -17,8 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class ProfileSummary {
+    /**
+     * Username displayed for the user profile.
+     */
+    private String username;
     private long friendsCount;
-    private long eventsAttended;
-    private long eventsCreated;
     private List<Trophy> trophies;
 }
