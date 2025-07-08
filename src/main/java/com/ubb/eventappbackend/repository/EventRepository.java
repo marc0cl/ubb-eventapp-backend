@@ -34,4 +34,28 @@ public interface EventRepository extends JpaRepository<Event, String> {
      * @return list of events originating from the given source type
      */
     List<Event> findByOrigenTipo(EventSourceType origenTipo);
+
+    /**
+     * Finds events created by the specified user.
+     *
+     * @param userId identifier of the creator
+     * @return list of events created by the user
+     */
+    List<Event> findByCreador_Id(String userId);
+
+    /**
+     * Retrieves all events belonging to the given group.
+     *
+     * @param groupId identifier of the group
+     * @return list of events for that group
+     */
+    List<Event> findByGrupo_Id(String groupId);
+
+    /**
+     * Fetches events that start after the provided date.
+     *
+     * @param date starting date-time (exclusive)
+     * @return list of upcoming events
+     */
+    List<Event> findByFechaInicioAfter(LocalDateTime date);
 }

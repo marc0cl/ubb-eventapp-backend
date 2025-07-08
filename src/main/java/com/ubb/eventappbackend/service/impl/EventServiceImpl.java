@@ -39,4 +39,22 @@ public class EventServiceImpl implements EventService {
     public Optional<Event> findById(String id) {
         return eventRepository.findById(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<Event> findByCreator(String userId) {
+        return eventRepository.findByCreador_Id(userId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<Event> findByGroup(String groupId) {
+        return eventRepository.findByGrupo_Id(groupId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<Event> findUpcomingEvents(java.time.LocalDateTime after) {
+        return eventRepository.findByFechaInicioAfter(after);
+    }
 }
