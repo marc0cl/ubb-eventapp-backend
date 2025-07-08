@@ -26,6 +26,9 @@ public class User {
     @Column(length = 80, nullable = false)
     private String apellidos;
 
+    @Column(length = 255)
+    private String password;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserState estado = UserState.ACTIVO;
