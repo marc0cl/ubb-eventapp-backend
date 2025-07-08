@@ -9,18 +9,15 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * Simple DTO aggregating basic profile information for a user.
+ * DTO aggregating event statistics for a user.
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProfileSummary {
-    /**
-     * Username displayed for the user profile.
-     */
-    private String username;
-    private long friendsCount;
-    private List<Trophy> trophies;
+public class ProfileEvents {
+    private long eventsAttended;
+    private long eventsCreated;
+    private List<CalendarEntry> calendar;
 }

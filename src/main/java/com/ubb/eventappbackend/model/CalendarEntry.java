@@ -6,21 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Simple DTO aggregating basic profile information for a user.
+ * Simple DTO grouping events occurring at the same date and time.
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProfileSummary {
-    /**
-     * Username displayed for the user profile.
-     */
-    private String username;
-    private long friendsCount;
-    private List<Trophy> trophies;
+public class CalendarEntry {
+    private LocalDateTime date;
+    private List<String> eventIds;
 }

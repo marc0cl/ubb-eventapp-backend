@@ -26,6 +26,12 @@ public class User {
     @Column(length = 80, nullable = false)
     private String apellidos;
 
+    /**
+     * Optional username chosen by the user. Will be displayed on profile pages.
+     */
+    @Column(length = 80, unique = true)
+    private String username;
+
     @Column(length = 255)
     private String password;
 
