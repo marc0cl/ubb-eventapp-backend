@@ -34,4 +34,12 @@ public interface EventRepository extends JpaRepository<Event, String> {
      * @return list of events originating from the given source type
      */
     List<Event> findByOrigenTipo(EventSourceType origenTipo);
+
+    /**
+     * Counts events created by the specified user.
+     *
+     * @param creadorId identifier of the user
+     * @return number of events where the given user is creator
+     */
+    long countByCreador_Id(String creadorId);
 }
