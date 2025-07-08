@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 /**
  * DTO aggregating event statistics for a user.
@@ -19,5 +18,8 @@ import java.util.List;
 public class ProfileEvents {
     private long eventsAttended;
     private long eventsCreated;
-    private List<CalendarEntry> calendar;
+    /**
+     * Number of future events the user is registered to attend.
+     */
+    private long eventsToAttend;
 }

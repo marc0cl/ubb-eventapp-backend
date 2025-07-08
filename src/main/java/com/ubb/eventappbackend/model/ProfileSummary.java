@@ -23,4 +23,8 @@ public class ProfileSummary {
     private String username;
     private long friendsCount;
     private List<Trophy> trophies;
+    /**
+     * Aggregated statistics about the user's events.
+     */
+    private ProfileEvents events;
 }

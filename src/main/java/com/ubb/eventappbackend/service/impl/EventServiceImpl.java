@@ -57,4 +57,11 @@ public class EventServiceImpl implements EventService {
     public java.util.List<Event> findUpcomingEvents(java.time.LocalDateTime after) {
         return eventRepository.findByFechaInicioAfter(after);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<Event> findByIds(java.util.List<String> ids) {
+        return ids == null || ids.isEmpty() ? java.util.Collections.emptyList() :
+                eventRepository.findAllById(ids);
+    }
 }
