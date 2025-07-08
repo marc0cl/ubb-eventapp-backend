@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -35,5 +36,14 @@ public class EventServiceImplTest {
         ArgumentCaptor<Event> captor = ArgumentCaptor.forClass(Event.class);
         verify(eventRepository).save(captor.capture());
         assertEquals(ValidationState.APROBADO, captor.getValue().getEstadoValidacion());
+    }
+
+    @Test
+    void findByIds_delegatesToRepository() {
+        when(eventRepository.findAllById(List.of("e1", "e2"))).thenReturn(List.of(new Event(), new Event()));
+
+        service.findByIds(List.of("e1", "e2"));
+
+        verify(eventRepository).findAllById(List.of("e1", "e2"));
     }
 }

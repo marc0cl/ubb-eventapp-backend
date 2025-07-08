@@ -13,4 +13,12 @@ public interface EventService {
     java.util.List<Event> findByCreator(String userId);
     java.util.List<Event> findByGroup(String groupId);
     java.util.List<Event> findUpcomingEvents(java.time.LocalDateTime after);
+
+    /**
+     * Retrieves the events with the provided identifiers.
+     *
+     * @param ids list of event ids
+     * @return list of events found
+     */
+    java.util.List<Event> findByIds(java.util.List<String> ids);
 }
