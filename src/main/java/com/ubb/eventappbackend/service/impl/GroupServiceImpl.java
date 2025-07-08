@@ -45,4 +45,10 @@ public class GroupServiceImpl implements GroupService {
     public List<Group> findByTags(Collection<Integer> tagIds) {
         return groupRepository.findDistinctByTagsIdIn(tagIds);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Group> findByName(String name) {
+        return groupRepository.findByNombreContainingIgnoreCase(name);
+    }
 }
