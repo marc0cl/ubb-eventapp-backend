@@ -26,4 +26,12 @@ public interface GroupService {
      * @return list of groups having at least one of the tags
      */
     List<Group> findByTags(Collection<Integer> tagIds);
+
+    /**
+     * Searches for groups whose name contains the provided text.
+     *
+     * @param name part of the name to look for
+     * @return list of groups matching the name
+     */
+    List<Group> findByName(String name);
 }
