@@ -1,0 +1,387 @@
+{
+  "info": {
+    "name": "EventApp API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"test@example.com\", \"password\": \"secret\", \"username\": \"testuser\", \"firstName\": \"John\", \"lastName\": \"Doe\"}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"test@example.com\", \"password\": \"secret\"}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/refresh"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"user-id\", \"correoUbb\": \"user@ubb.cl\", \"nombres\": \"Juan\", \"apellidos\": \"Pérez\", \"username\": \"juan\", \"id_campus\": \"campus-id\"}"
+            },
+            "url": "{{baseUrl}}/users"
+          }
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id"
+          }
+        },
+        {
+          "name": "Profile Summary",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/summary"
+          }
+        },
+        {
+          "name": "Profile Events",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/events"
+          }
+        },
+        {
+          "name": "Calendar",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/calendar"
+          }
+        },
+        {
+          "name": "Events To Attend",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:id/to-attend"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"event-id\", \"titulo\": \"Evento de prueba\", \"descripcion\": \"Descripción\", \"fechaInicio\": \"2024-01-01T10:00:00\", \"fechaFin\": \"2024-01-01T12:00:00\", \"lugar\": \"Auditorio\", \"aforoMax\": 100}"
+            },
+            "url": "{{baseUrl}}/events"
+          }
+        },
+        {
+          "name": "Update Event",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"event-id\", \"titulo\": \"Evento de prueba\", \"descripcion\": \"Descripción\", \"fechaInicio\": \"2024-01-01T10:00:00\", \"fechaFin\": \"2024-01-01T12:00:00\", \"lugar\": \"Auditorio\", \"aforoMax\": 100}"
+            },
+            "url": "{{baseUrl}}/events"
+          }
+        },
+        {
+          "name": "Approve Event",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/events/:id/approve"
+          }
+        },
+        {
+          "name": "Find Event By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events/:id"
+          }
+        },
+        {
+          "name": "Events By Creator",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events/creator/:userId"
+          }
+        },
+        {
+          "name": "Events By Group",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events/group/:groupId"
+          }
+        },
+        {
+          "name": "Upcoming Events",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events/upcoming"
+          }
+        },
+        {
+          "name": "Events By Ids",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registrations",
+      "item": [
+        {
+          "name": "Register For Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": {\"eventId\": \"event-id\", \"userId\": \"user-id\"}}"
+            },
+            "url": "{{baseUrl}}/registrations"
+          }
+        },
+        {
+          "name": "Cancel Registration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"eventId\": \"event-id\", \"userId\": \"user-id\"}"
+            },
+            "url": "{{baseUrl}}/registrations/cancel"
+          }
+        },
+        {
+          "name": "Get Registration",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/registrations/:eventId/:userId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Friendships",
+      "item": [
+        {
+          "name": "Request Friendship",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": {\"user1Id\": \"user1\", \"user2Id\": \"user2\"}}"
+            },
+            "url": "{{baseUrl}}/friendships"
+          }
+        },
+        {
+          "name": "Accept Friendship",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user1Id\": \"user1\", \"user2Id\": \"user2\"}"
+            },
+            "url": "{{baseUrl}}/friendships/accept"
+          }
+        },
+        {
+          "name": "Get Friendship",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/friendships/:user1/:user2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Groups",
+      "item": [
+        {
+          "name": "Create Group",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"group-id\", \"nombre\": \"Grupo de prueba\", \"descripcion\": \"Descripción\", \"imagenUrl\": \"http://example.com/logo.png\"}"
+            },
+            "url": "{{baseUrl}}/groups"
+          }
+        },
+        {
+          "name": "Update Group",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"group-id\", \"nombre\": \"Grupo de prueba\", \"descripcion\": \"Descripción\", \"imagenUrl\": \"http://example.com/logo.png\"}"
+            },
+            "url": "{{baseUrl}}/groups"
+          }
+        },
+        {
+          "name": "Get Group By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/groups/:id"
+          }
+        },
+        {
+          "name": "Groups By Representative",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/groups/representative/:userId"
+          }
+        },
+        {
+          "name": "Groups By Tags",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/groups/tags"
+          }
+        },
+        {
+          "name": "Search Groups",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/groups/search"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support Tickets",
+      "item": [
+        {
+          "name": "Open Ticket",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"ticket-id\", \"descripcion\": \"Necesito ayuda\", \"reporter\": {\"id\": \"user-id\"}}"
+            },
+            "url": "{{baseUrl}}/tickets"
+          }
+        },
+        {
+          "name": "Close Ticket",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tickets/:id/close"
+          }
+        },
+        {
+          "name": "Get Ticket",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tickets/:id"
+          }
+        }
+      ]
+    }
+  ]
+}

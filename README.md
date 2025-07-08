@@ -10,3 +10,7 @@ The application reads the MySQL connection details from environment variables. C
 - `DB_PASSWORD` – database password
 
 Defaults are provided for local development if the variables are not set.
+
+## API Testing with Postman
+A Postman collection with all endpoints is provided under the `postman` folder. Import `postman/EventApp.postman_collection.json` into Postman and set the `baseUrl` variable to match your running server (e.g. `http://localhost:8080`).
+
