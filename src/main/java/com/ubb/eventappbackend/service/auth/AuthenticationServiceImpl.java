@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,8 +45,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .apellidos(request.getLastName())
                 .build();
         User savedUser = userRepository.save(user);
-        String jwtToken = jwtService.generateToken(savedUser);
-        String refreshToken = jwtService.generateToken(savedUser);
+        UserDetails userDetails = asUserDetails(savedUser);
+        String jwtToken = jwtService.generateToken(userDetails);
+        String refreshToken = jwtService.generateToken(userDetails);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
@@ -66,8 +69,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         User user = userRepository.findByCorreoUbb(request.getEmail())
                 .orElseThrow();
-        String jwtToken = jwtService.generateToken(user);
-        String refreshToken = jwtService.generateToken(user);
+        UserDetails userDetails = asUserDetails(user);
+        String jwtToken = jwtService.generateToken(userDetails);
+        String refreshToken = jwtService.generateToken(userDetails);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
@@ -88,8 +92,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
             User user = userRepository.findByCorreoUbb(userEmail).orElseThrow();
-            if (jwtService.isTokenValid(refreshToken, user)) {
-                String accessToken = jwtService.generateToken(user);
+            UserDetails userDetails = asUserDetails(user);
+            if (jwtService.isTokenValid(refreshToken, userDetails)) {
+                String accessToken = jwtService.generateToken(userDetails);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
                 AuthenticationResponse authResponse = AuthenticationResponse.builder()
@@ -100,6 +105,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }
         }
+    }
+
+    private UserDetails asUserDetails(User user) {
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getCorreoUbb())
+                .password(user.getPassword() == null ? "" : user.getPassword())
+                .authorities(user.getRoles() == null ? java.util.List.of() :
+                        user.getRoles().stream()
+                                .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getNombre().name()))
+                                .toList())
+                .build();
     }
 
     private void saveUserToken(User user, String jwtToken) {
