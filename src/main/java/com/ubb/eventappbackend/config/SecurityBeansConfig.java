@@ -27,8 +27,18 @@ public class SecurityBeansConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByCorreoUbb(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return username -> {
+            com.ubb.eventappbackend.model.User user = userRepository.findByCorreoUbb(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            return org.springframework.security.core.userdetails.User.builder()
+                    .username(user.getCorreoUbb())
+                    .password(user.getPassword() == null ? "" : user.getPassword())
+                    .authorities(user.getRoles() == null ? java.util.List.of() :
+                            user.getRoles().stream()
+                                    .map(r -> new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_" + r.getNombre().name()))
+                                    .toList())
+                    .build();
+        };
     }
 
     @Bean
