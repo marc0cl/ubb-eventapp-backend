@@ -2,6 +2,7 @@ package com.ubb.eventappbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,4 +18,7 @@ public class Tag {
 
     @Column(length = 60, unique = true)
     private String nombre;
+
+    @ManyToMany(mappedBy = "tags")
+    private Set<Group> grupos;
 }

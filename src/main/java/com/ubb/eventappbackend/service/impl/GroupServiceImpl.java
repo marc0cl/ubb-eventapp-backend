@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +32,17 @@ public class GroupServiceImpl implements GroupService {
     @Transactional(readOnly = true)
     public Optional<Group> findById(String id) {
         return groupRepository.findById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Group> findByRepresentativeUser(String userId) {
+        return groupRepository.findByRepresentativeUser(userId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Group> findByTags(Collection<Integer> tagIds) {
+        return groupRepository.findDistinctByTagsIdIn(tagIds);
     }
 }
