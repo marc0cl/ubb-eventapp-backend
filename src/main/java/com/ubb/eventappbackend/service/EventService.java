@@ -9,4 +9,8 @@ public interface EventService {
     Event updateEvent(Event event);
     Event approveEvent(String eventId);
     Optional<Event> findById(String id);
+
+    java.util.List<Event> findByCreator(String userId);
+    java.util.List<Event> findByGroup(String groupId);
+    java.util.List<Event> findUpcomingEvents(java.time.LocalDateTime after);
 }
