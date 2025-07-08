@@ -11,8 +11,16 @@
           "name": "Register",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"test@example.com\", \"password\": \"secret\", \"username\": \"testuser\", \"firstName\": \"John\", \"lastName\": \"Doe\"}"
+            },
             "url": "{{baseUrl}}/auth/register"
           }
         },
@@ -20,8 +28,16 @@
           "name": "Login",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"test@example.com\", \"password\": \"secret\"}"
+            },
             "url": "{{baseUrl}}/auth/login"
           }
         },
@@ -41,8 +57,16 @@
           "name": "Update Profile",
           "request": {
             "method": "PUT",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"user-id\", \"correoUbb\": \"user@ubb.cl\", \"nombres\": \"Juan\", \"apellidos\": \"Pérez\", \"username\": \"juan\", \"id_campus\": \"campus-id\"}"
+            },
             "url": "{{baseUrl}}/users"
           }
         },
@@ -90,8 +114,16 @@
           "name": "Create Event",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"event-id\", \"titulo\": \"Evento de prueba\", \"descripcion\": \"Descripción\", \"fechaInicio\": \"2024-01-01T10:00:00\", \"fechaFin\": \"2024-01-01T12:00:00\", \"lugar\": \"Auditorio\", \"aforoMax\": 100}"
+            },
             "url": "{{baseUrl}}/events"
           }
         },
@@ -99,8 +131,16 @@
           "name": "Update Event",
           "request": {
             "method": "PUT",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"event-id\", \"titulo\": \"Evento de prueba\", \"descripcion\": \"Descripción\", \"fechaInicio\": \"2024-01-01T10:00:00\", \"fechaFin\": \"2024-01-01T12:00:00\", \"lugar\": \"Auditorio\", \"aforoMax\": 100}"
+            },
             "url": "{{baseUrl}}/events"
           }
         },
@@ -155,8 +195,16 @@
           "name": "Register For Event",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": {\"eventId\": \"event-id\", \"userId\": \"user-id\"}}"
+            },
             "url": "{{baseUrl}}/registrations"
           }
         },
@@ -164,8 +212,16 @@
           "name": "Cancel Registration",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"eventId\": \"event-id\", \"userId\": \"user-id\"}"
+            },
             "url": "{{baseUrl}}/registrations/cancel"
           }
         },
@@ -185,8 +241,16 @@
           "name": "Request Friendship",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": {\"user1Id\": \"user1\", \"user2Id\": \"user2\"}}"
+            },
             "url": "{{baseUrl}}/friendships"
           }
         },
@@ -194,8 +258,16 @@
           "name": "Accept Friendship",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user1Id\": \"user1\", \"user2Id\": \"user2\"}"
+            },
             "url": "{{baseUrl}}/friendships/accept"
           }
         },
@@ -215,8 +287,16 @@
           "name": "Create Group",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"group-id\", \"nombre\": \"Grupo de prueba\", \"descripcion\": \"Descripción\", \"imagenUrl\": \"http://example.com/logo.png\"}"
+            },
             "url": "{{baseUrl}}/groups"
           }
         },
@@ -224,8 +304,16 @@
           "name": "Update Group",
           "request": {
             "method": "PUT",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"group-id\", \"nombre\": \"Grupo de prueba\", \"descripcion\": \"Descripción\", \"imagenUrl\": \"http://example.com/logo.png\"}"
+            },
             "url": "{{baseUrl}}/groups"
           }
         },
@@ -266,8 +354,16 @@
           "name": "Open Ticket",
           "request": {
             "method": "POST",
-            "header": [{"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{}"},
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": \"ticket-id\", \"descripcion\": \"Necesito ayuda\", \"reporter\": {\"id\": \"user-id\"}}"
+            },
             "url": "{{baseUrl}}/tickets"
           }
         },
