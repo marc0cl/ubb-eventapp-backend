@@ -8,6 +8,7 @@ public interface EventService {
     Event createEvent(Event event);
     Event updateEvent(Event event);
     Event approveEvent(Long eventId);
+    void deleteEvent(Long eventId);
     Optional<Event> findById(Long id);
 
     java.util.List<Event> findByCreator(Long userId);
@@ -28,4 +29,11 @@ public interface EventService {
      * @return list of events found
      */
     java.util.List<Event> findByIds(java.util.List<Long> ids);
+
+    /**
+     * Retrieves events waiting for approval.
+     *
+     * @return list of pending events
+     */
+    java.util.List<Event> findPendingEvents();
 }

@@ -3,6 +3,7 @@ package com.ubb.eventapp.repository;
 import com.ubb.eventapp.model.Event;
 import com.ubb.eventapp.model.EventSourceType;
 import com.ubb.eventapp.model.Visibility;
+import com.ubb.eventapp.model.ValidationState;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -58,4 +59,12 @@ public interface EventRepository extends JpaRepository<Event, Long> {
      * @return list of upcoming events
      */
     List<Event> findByFechaInicioAfter(LocalDateTime date);
+
+    /**
+     * Retrieves events that are awaiting approval.
+     *
+     * @param state validation state to match, typically {@link ValidationState#PENDIENTE}
+     * @return list of events with the provided validation state
+     */
+    List<Event> findByEstadoValidacion(ValidationState state);
 }

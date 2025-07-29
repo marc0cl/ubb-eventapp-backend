@@ -32,6 +32,12 @@ public class EventController {
         return ResponseEntity.ok(service.approveEvent(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.deleteEvent(id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Event> findById(@PathVariable Long id) {
         return service.findById(id)
@@ -52,6 +58,11 @@ public class EventController {
     @GetMapping("/public")
     public ResponseEntity<List<Event>> findPublic() {
         return ResponseEntity.ok(service.findPublicEvents());
+    }
+
+    @GetMapping("/pending")
+    public ResponseEntity<List<Event>> findPending() {
+        return ResponseEntity.ok(service.findPendingEvents());
     }
 
     @GetMapping("/upcoming")

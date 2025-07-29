@@ -183,6 +183,14 @@ curl -X POST http://localhost:8080/events/1/approve
 ```
 - **Response**: approved `Event`.
 
+### Delete Event
+- **DELETE** `/events/{id}`
+- **Curl**:
+```bash
+curl -X DELETE http://localhost:8080/events/1
+```
+- **Response**: `200 OK` with empty body.
+
 ### Find Event By Id
 - **GET** `/events/{id}`
 - **Curl**:
@@ -244,6 +252,20 @@ curl http://localhost:8080/events/public
 ```json
 [
   {"id":1,"titulo":"Charla"}
+]
+```
+
+### Pending Events
+- **GET** `/events/pending`
+
+Example:
+```bash
+curl http://localhost:8080/events/pending
+```
+- **Response**:
+```json
+[
+  {"id":2,"titulo":"Pendiente"}
 ]
 ```
 

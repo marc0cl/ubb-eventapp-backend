@@ -158,6 +158,9 @@ Updates an event. Body is the same as creation with an `id` field.
 ### `POST /events/{id}/approve`
 Marks the event as approved.
 
+### `DELETE /events/{id}`
+Removes an event.
+
 ### `GET /events/{id}`
 Returns a single event.
 
@@ -172,6 +175,9 @@ Lists upcoming events after the given ISO date-time.
 
 ### `GET /events/public`
 Lists all public events.
+
+### `GET /events/pending`
+Lists events waiting for approval.
 
 ### `GET /events?ids=1&ids=2`
 Fetches multiple events by id.
