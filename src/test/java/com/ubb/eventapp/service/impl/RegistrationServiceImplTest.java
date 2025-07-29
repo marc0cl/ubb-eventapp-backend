@@ -26,7 +26,7 @@ public class RegistrationServiceImplTest {
 
     @Test
     void cancelRegistration_setsStateToCanceledAndSaves() {
-        RegistrationId id = new RegistrationId(1l, 2l);
+        RegistrationId id = new RegistrationId(1L, 2L);
         Registration reg = Registration.builder().id(id).estado(RegistrationState.INSCRITO).build();
         when(registrationRepository.findById(id)).thenReturn(Optional.of(reg));
         when(registrationRepository.save(any(Registration.class))).thenAnswer(invocation -> invocation.getArgument(0));
