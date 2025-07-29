@@ -2,6 +2,7 @@ package com.ubb.eventapp.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 
 @Entity
@@ -20,5 +21,6 @@ public class Tag {
     private String nombre;
 
     @ManyToMany(mappedBy = "tags")
+    @JsonIgnore
     private Set<Group> grupos;
 }
