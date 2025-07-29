@@ -16,5 +16,5 @@ public interface RegistrationRepository extends JpaRepository<Registration, Regi
      * @param estado state of the registration
      * @return list of registrations that match
      */
-    List<Registration> findByUser_IdAndEstado(Integer userId, RegistrationState estado);
+    List<Registration> findByUser_IdAndEstado(Long userId, RegistrationState estado);
 }

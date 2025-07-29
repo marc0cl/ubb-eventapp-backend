@@ -7,11 +7,11 @@ import java.util.Optional;
 public interface EventService {
     Event createEvent(Event event);
     Event updateEvent(Event event);
-    Event approveEvent(Integer eventId);
-    Optional<Event> findById(Integer id);
+    Event approveEvent(Long eventId);
+    Optional<Event> findById(Long id);
 
-    java.util.List<Event> findByCreator(Integer userId);
-    java.util.List<Event> findByGroup(Integer groupId);
+    java.util.List<Event> findByCreator(Long userId);
+    java.util.List<Event> findByGroup(Long groupId);
     java.util.List<Event> findUpcomingEvents(java.time.LocalDateTime after);
 
     /**
@@ -20,5 +20,5 @@ public interface EventService {
      * @param ids list of event ids
      * @return list of events found
      */
-    java.util.List<Event> findByIds(java.util.List<Integer> ids);
+    java.util.List<Event> findByIds(java.util.List<Long> ids);
 }

@@ -14,7 +14,7 @@ public class SupportTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ticket")
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "id_reporter")

@@ -23,7 +23,7 @@ public class SupportTicketServiceImpl implements SupportTicketService {
     }
 
     @Override
-    public SupportTicket closeTicket(Integer ticketId) {
+    public SupportTicket closeTicket(Long ticketId) {
         SupportTicket ticket = supportTicketRepository.findById(ticketId).orElseThrow();
         ticket.setEstado(TicketState.CERRADO);
         return supportTicketRepository.save(ticket);
@@ -31,7 +31,7 @@ public class SupportTicketServiceImpl implements SupportTicketService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<SupportTicket> findById(Integer id) {
+    public Optional<SupportTicket> findById(Long id) {
         return supportTicketRepository.findById(id);
     }
 }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class EventReview {
     @Id
     @Column(name = "id_evento")
-    private Integer idEvento;
+    private Long idEvento;
 
     @OneToOne
     @MapsId

@@ -33,29 +33,29 @@ public class UserServiceImplTest {
 
     @Test
     void getProfileSummary_buildsSummaryFromRepositories() {
-        User user = User.builder().id("u1").username("john").build();
-        when(userRepository.findById("u1")).thenReturn(Optional.of(user));
-        when(friendshipRepository.findByUserIdAndEstado("u1", FriendshipState.ACEPTADA))
+        User user = User.builder().id(1L).username("john").build();
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(friendshipRepository.findByUserIdAndEstado(1L, FriendshipState.ACEPTADA))
                 .thenReturn(List.of(new Friendship(), new Friendship()));
         Trophy trophy = Trophy.builder().id(1).nombre("T1").build();
         UserTrophy ut = UserTrophy.builder().trophy(trophy).build();
-        when(userTrophyRepository.findByUser_Id("u1")).thenReturn(List.of(ut));
+        when(userTrophyRepository.findByUser_Id(1L)).thenReturn(List.of(ut));
 
         LocalDateTime now = LocalDateTime.now();
-        Event createdEvent = Event.builder().id("e1").fechaInicio(now).build();
-        when(eventRepository.findByCreador_Id("u1")).thenReturn(List.of(createdEvent));
+        Event createdEvent = Event.builder().id(1L).fechaInicio(now).build();
+        when(eventRepository.findByCreador_Id(1L)).thenReturn(List.of(createdEvent));
         Registration attended = Registration.builder()
-                .event(Event.builder().id("e2").fechaInicio(now).build())
+                .event(Event.builder().id(2L).fechaInicio(now).build())
                 .build();
-        when(registrationRepository.findByUser_IdAndEstado("u1", RegistrationState.ASISTIO))
+        when(registrationRepository.findByUser_IdAndEstado(1L, RegistrationState.ASISTIO))
                 .thenReturn(List.of(attended));
         Registration toAttend = Registration.builder()
-                .event(Event.builder().id("e3").fechaInicio(now).build())
+                .event(Event.builder().id(3L).fechaInicio(now).build())
                 .build();
-        when(registrationRepository.findByUser_IdAndEstado("u1", RegistrationState.INSCRITO))
+        when(registrationRepository.findByUser_IdAndEstado(1L, RegistrationState.INSCRITO))
                 .thenReturn(List.of(toAttend));
 
-        ProfileSummary summary = service.getProfileSummary("u1");
+        ProfileSummary summary = service.getProfileSummary(1L);
 
         assertEquals("john", summary.getUsername());
         assertEquals(2, summary.getFriendsCount());
@@ -69,47 +69,47 @@ public class UserServiceImplTest {
     @Test
     void getProfileEvents_buildsEventSummaryFromRepositories() {
         LocalDateTime now = LocalDateTime.now();
-        when(eventRepository.findByCreador_Id("u1"))
-                .thenReturn(List.of(Event.builder().id("e1").fechaInicio(now).build()));
+        when(eventRepository.findByCreador_Id(1L))
+                .thenReturn(List.of(Event.builder().id(1L).fechaInicio(now).build()));
         Registration attended = Registration.builder()
-                .event(Event.builder().id("e2").fechaInicio(now).build())
+                .event(Event.builder().id(2L).fechaInicio(now).build())
                 .build();
-        when(registrationRepository.findByUser_IdAndEstado("u1", RegistrationState.ASISTIO))
+        when(registrationRepository.findByUser_IdAndEstado(1L, RegistrationState.ASISTIO))
                 .thenReturn(List.of(attended));
         Registration toAttend = Registration.builder()
-                .event(Event.builder().id("e3").fechaInicio(now).build())
+                .event(Event.builder().id(3L).fechaInicio(now).build())
                 .build();
-        when(registrationRepository.findByUser_IdAndEstado("u1", RegistrationState.INSCRITO))
+        when(registrationRepository.findByUser_IdAndEstado(1L, RegistrationState.INSCRITO))
                 .thenReturn(List.of(toAttend));
 
-        ProfileEvents result = service.getProfileEvents("u1");
+        ProfileEvents result = service.getProfileEvents(1L);
 
         assertEquals(1, result.getEventsCreated());
         assertEquals(1, result.getEventsAttended());
         assertEquals(1, result.getEventsToAttend());
 
-        List<CalendarEntry> calendar = service.getEventCalendar("u1");
+        List<CalendarEntry> calendar = service.getEventCalendar(1L);
 
         assertEquals(1, calendar.size());
-        assertTrue(calendar.get(0).getEventIds().contains("e1"));
-        assertTrue(calendar.get(0).getEventIds().contains("e2"));
-        assertTrue(calendar.get(0).getEventIds().contains("e3"));
+        assertTrue(calendar.get(0).getEventIds().contains(1L));
+        assertTrue(calendar.get(0).getEventIds().contains(2L));
+        assertTrue(calendar.get(0).getEventIds().contains(3L));
     }
 
     @Test
     void getEventsToAttend_returnsIdsOfUpcomingEvents() {
         Registration toAttend1 = Registration.builder()
-                .event(Event.builder().id("e1").build())
+                .event(Event.builder().id(1L).build())
                 .build();
         Registration toAttend2 = Registration.builder()
-                .event(Event.builder().id("e2").build())
+                .event(Event.builder().id(2L).build())
                 .build();
-        when(registrationRepository.findByUser_IdAndEstado("u1", RegistrationState.INSCRITO))
+        when(registrationRepository.findByUser_IdAndEstado(1L, RegistrationState.INSCRITO))
                 .thenReturn(List.of(toAttend1, toAttend2));
 
-        EventsToAttend result = service.getEventsToAttend("u1");
-        List<String> ids = result.getEventIds();
+        EventsToAttend result = service.getEventsToAttend(1L);
+        List<Long> ids = result.getEventIds();
 
-        assertEquals(List.of("e1", "e2"), ids);
+        assertEquals(List.of(1L, 2L), ids);
     }
 }

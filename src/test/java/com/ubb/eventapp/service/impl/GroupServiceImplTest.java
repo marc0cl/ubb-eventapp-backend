@@ -24,7 +24,7 @@ public class GroupServiceImplTest {
 
     @Test
     void findByTags_returnsRepositoryResult() {
-        List<Group> groups = List.of(Group.builder().id("1").build());
+        List<Group> groups = List.of(Group.builder().id(1L).build());
         Set<Integer> tagIds = Set.of(1, 2);
         when(groupRepository.findDistinctByTagsIdIn(tagIds)).thenReturn(groups);
 

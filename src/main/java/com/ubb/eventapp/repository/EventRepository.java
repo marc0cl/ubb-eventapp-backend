@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface EventRepository extends JpaRepository<Event, Integer> {
+public interface EventRepository extends JpaRepository<Event, Long> {
 
     /**
      * Retrieves events that start within the specified date range.
@@ -41,7 +41,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
      * @param userId identifier of the creator
      * @return list of events created by the user
      */
-    List<Event> findByCreador_Id(Integer userId);
+    List<Event> findByCreador_Id(Long userId);
 
     /**
      * Retrieves all events belonging to the given group.
@@ -49,7 +49,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
      * @param groupId identifier of the group
      * @return list of events for that group
      */
-    List<Event> findByGrupo_Id(Integer groupId);
+    List<Event> findByGrupo_Id(Long groupId);
 
     /**
      * Fetches events that start after the provided date.
