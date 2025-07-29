@@ -19,5 +19,5 @@ import java.util.List;
 @Builder
 public class CalendarEntry {
     private LocalDateTime date;
-    private List<String> eventIds;
+    private List<Integer> eventIds;
 }

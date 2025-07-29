@@ -11,5 +11,5 @@ public interface UserTrophyRepository extends JpaRepository<UserTrophy, UserTrop
      * @param userId id of the user
      * @return list of user trophies
      */
-    java.util.List<UserTrophy> findByUser_Id(String userId);
+    java.util.List<UserTrophy> findByUser_Id(Integer userId);
 }

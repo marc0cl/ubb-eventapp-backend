@@ -13,8 +13,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class UserTrophyId implements Serializable {
-    @Column(name = "id_usuario", length = 36)
-    private String userId;
+    @Column(name = "id_usuario")
+    private Integer userId;
 
     @Column(name = "id_trofeo")
     private Integer trophyId;

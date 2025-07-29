@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<User> findById(String id) {
+    public Optional<User> findById(Integer id) {
         return userRepository.findById(id);
     }
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
      * to keep the logic centralized.
      * </p>
      */
-    public ProfileSummary getProfileSummary(String userId) {
+    public ProfileSummary getProfileSummary(Integer userId) {
         User user = userRepository.findById(userId).orElseThrow();
         long friendCount = friendshipRepository
                 .findByUserIdAndEstado(userId, FriendshipState.ACEPTADA)
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public ProfileEvents getProfileEvents(String userId) {
+    public ProfileEvents getProfileEvents(Integer userId) {
         java.util.List<com.ubb.eventapp.model.Registration> attendedRegs =
                 registrationRepository.findByUser_IdAndEstado(userId, RegistrationState.ASISTIO);
         long eventsAttended = attendedRegs.size();
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public java.util.List<CalendarEntry> getEventCalendar(String userId) {
+    public java.util.List<CalendarEntry> getEventCalendar(Integer userId) {
         java.util.List<com.ubb.eventapp.model.Event> createdEvents =
                 eventRepository.findByCreador_Id(userId);
 
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
                         .map(com.ubb.eventapp.model.Registration::getEvent)
                         .toList();
 
-        java.util.List<String> toAttendIds = getEventsToAttend(userId).getEventIds();
+        java.util.List<Integer> toAttendIds = getEventsToAttend(userId).getEventIds();
         java.util.List<com.ubb.eventapp.model.Event> toAttendEvents =
                 eventRepository.findAllById(toAttendIds);
 
@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
         allEvents.addAll(attendedEvents);
         allEvents.addAll(toAttendEvents);
 
-        java.util.Map<java.time.LocalDateTime, java.util.List<String>> grouped = new java.util.HashMap<>();
+        java.util.Map<java.time.LocalDateTime, java.util.List<Integer>> grouped = new java.util.HashMap<>();
         for (com.ubb.eventapp.model.Event event : allEvents) {
             java.time.LocalDateTime date = event.getFechaInicio();
             grouped.computeIfAbsent(date, k -> new java.util.ArrayList<>()).add(event.getId());
@@ -134,8 +134,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public EventsToAttend getEventsToAttend(String userId) {
-        java.util.List<String> ids = registrationRepository
+    public EventsToAttend getEventsToAttend(Integer userId) {
+        java.util.List<Integer> ids = registrationRepository
                 .findByUser_IdAndEstado(userId, RegistrationState.INSCRITO)
                 .stream()
                 .map(r -> r.getEvent().getId())

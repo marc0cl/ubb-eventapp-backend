@@ -25,7 +25,7 @@ public class FriendshipController {
     }
 
     @GetMapping("/{user1}/{user2}")
-    public ResponseEntity<Friendship> findById(@PathVariable String user1, @PathVariable String user2) {
+    public ResponseEntity<Friendship> findById(@PathVariable Integer user1, @PathVariable Integer user2) {
         FriendshipId id = new FriendshipId(user1, user2);
         return service.findById(id)
                 .map(ResponseEntity::ok)

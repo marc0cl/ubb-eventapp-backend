@@ -12,8 +12,9 @@ import lombok.*;
 @Builder
 public class SupportTicket {
     @Id
-    @Column(name = "id_ticket", length = 36)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ticket")
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_reporter")

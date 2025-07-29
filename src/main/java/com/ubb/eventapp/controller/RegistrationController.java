@@ -25,7 +25,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/{eventId}/{userId}")
-    public ResponseEntity<Registration> findById(@PathVariable String eventId, @PathVariable String userId) {
+    public ResponseEntity<Registration> findById(@PathVariable Integer eventId, @PathVariable Integer userId) {
         RegistrationId id = new RegistrationId(eventId, userId);
         return service.findById(id)
                 .map(ResponseEntity::ok)

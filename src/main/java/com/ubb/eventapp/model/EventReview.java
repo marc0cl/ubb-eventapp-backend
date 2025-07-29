@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 @Builder
 public class EventReview {
     @Id
-    @Column(name = "id_evento", length = 36)
-    private String idEvento;
+    @Column(name = "id_evento")
+    private Integer idEvento;
 
     @OneToOne
     @MapsId

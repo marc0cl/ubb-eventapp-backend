@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Collection;
 
-public interface GroupRepository extends JpaRepository<Group, String> {
+public interface GroupRepository extends JpaRepository<Group, Integer> {
 
     /**
      * Finds groups whose {@code nombre} contains the provided text, ignoring case.
@@ -25,7 +25,7 @@ public interface GroupRepository extends JpaRepository<Group, String> {
      * @return list of groups represented by the user
      */
     @Query("select gm.group from GroupMember gm where gm.user.id = :userId and gm.rolGrupo = com.ubb.eventapp.model.GroupRole.REPRESENTANTE")
-    List<Group> findByRepresentativeUser(@Param("userId") String userId);
+    List<Group> findByRepresentativeUser(@Param("userId") Integer userId);
 
     /**
      * Finds groups that are associated with any of the provided tag ids.

@@ -17,5 +17,5 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class EventsToAttend {
-    private List<String> eventIds;
+    private List<Integer> eventIds;
 }
