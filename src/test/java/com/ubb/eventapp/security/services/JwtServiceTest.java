@@ -25,9 +25,10 @@ public class JwtServiceTest {
     @Test
     void generateAndValidateToken() {
         UserDetails user = User.withUsername("user@test.com").password("pass").authorities("USER").build();
-        String token = service.generateToken(user);
+        String token = service.generateToken(java.util.Map.of("userId", 1L), user);
         assertNotNull(token);
         assertEquals("user@test.com", service.extractUsername(token));
+        assertEquals(1L, service.extractClaim(token, c -> c.get("userId", Long.class)));
         assertTrue(service.isTokenValid(token, user));
     }
 }
