@@ -5,6 +5,7 @@ import com.ubb.eventapp.model.FriendshipId;
 import com.ubb.eventapp.model.FriendshipState;
 import com.ubb.eventapp.repository.FriendshipRepository;
 import com.ubb.eventapp.service.FriendshipService;
+import com.ubb.eventapp.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,5 +48,20 @@ public class FriendshipServiceImpl implements FriendshipService {
     @Transactional(readOnly = true)
     public Optional<Friendship> findById(FriendshipId id) {
         return friendshipRepository.findById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<User> findFriends(Long userId) {
+        return friendshipRepository
+                .findByUserIdAndEstado(userId, FriendshipState.ACEPTADA)
+                .stream()
+                .map(f -> f.getUser1().getId().equals(userId) ? f.getUser2() : f.getUser1())
+                .toList();
+    }
+
+    @Override
+    public void deleteFriendship(FriendshipId id) {
+        friendshipRepository.deleteById(id);
     }
 }

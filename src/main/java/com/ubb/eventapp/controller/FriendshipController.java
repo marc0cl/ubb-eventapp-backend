@@ -34,11 +34,23 @@ public class FriendshipController {
         return ResponseEntity.ok(service.findPendingFriendships(userId));
     }
 
+    @GetMapping("/friends/{userId}")
+    public ResponseEntity<java.util.List<com.ubb.eventapp.model.User>> friends(@PathVariable Long userId) {
+        return ResponseEntity.ok(service.findFriends(userId));
+    }
+
     @GetMapping("/{user1}/{user2}")
     public ResponseEntity<Friendship> findById(@PathVariable Long user1, @PathVariable Long user2) {
         FriendshipId id = new FriendshipId(user1, user2);
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{user1}/{user2}")
+    public ResponseEntity<Void> delete(@PathVariable Long user1, @PathVariable Long user2) {
+        FriendshipId id = new FriendshipId(user1, user2);
+        service.deleteFriendship(id);
+        return ResponseEntity.ok().build();
     }
 }

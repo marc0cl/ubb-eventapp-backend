@@ -268,6 +268,12 @@ Lists pending friendship requests for a user.
 ### `GET /friendships/{user1}/{user2}`
 Gets friendship info.
 
+### `GET /friendships/friends/{userId}`
+Lists accepted friends of a user.
+
+### `DELETE /friendships/{user1}/{user2}`
+Deletes a friendship.
+
 ## Groups
 
 ### `POST /groups`

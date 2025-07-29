@@ -410,6 +410,22 @@ curl http://localhost:8080/friendships/1/2
 }
 ```
 
+### List Friends
+- **GET** `/friendships/friends/{userId}`
+- **Curl**:
+```bash
+curl http://localhost:8080/friendships/friends/1
+```
+- **Response**: list of `User`.
+
+### Delete Friendship
+- **DELETE** `/friendships/{user1}/{user2}`
+- **Curl**:
+```bash
+curl -X DELETE http://localhost:8080/friendships/1/2
+```
+- **Response**: `200 OK` with empty body.
+
 ## Groups
 
 ### Create Group
