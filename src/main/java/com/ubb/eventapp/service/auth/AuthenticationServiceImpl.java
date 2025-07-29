@@ -8,6 +8,9 @@ import com.ubb.eventapp.model.Token;
 import com.ubb.eventapp.model.TokenType;
 import com.ubb.eventapp.model.User;
 import com.ubb.eventapp.model.UserState;
+import com.ubb.eventapp.model.Role;
+import com.ubb.eventapp.model.RoleName;
+import com.ubb.eventapp.repository.RoleRepository;
 import com.ubb.eventapp.repository.TokenRepository;
 import com.ubb.eventapp.repository.UserRepository;
 import com.ubb.eventapp.security.AuthConstants;
@@ -32,19 +35,35 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
+        RoleName roleName;
+        String email = request.getEmail();
+        boolean external = request.isExternal();
+        if (email.endsWith("@alumnos.ubiobio.cl")) {
+            roleName = RoleName.ALUMNO;
+        } else if (email.endsWith("@ubiobio.cl")) {
+            roleName = external ? RoleName.EXTERNO : RoleName.DOCENTE;
+        } else {
+            roleName = RoleName.ALUMNO;
+        }
+
+        Role role = roleRepository.findByNombre(roleName)
+                .orElseThrow();
+
         User user = User.builder()
-                .correoUbb(request.getEmail())
+                .correoUbb(email)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .username(request.getUsername())
                 .nombres(request.getFirstName())
                 .apellidos(request.getLastName())
                 .estado(UserState.ACTIVO)
+                .roles(java.util.Set.of(role))
                 .build();
         User savedUser = userRepository.save(user);
         UserDetails userDetails = asUserDetails(savedUser);

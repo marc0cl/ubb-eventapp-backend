@@ -10,7 +10,7 @@ Registers a new user.
 ```bash
 curl -X POST "$BASE_URL/auth/register" \
   -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"secret","username":"testuser","firstName":"John","lastName":"Doe"}'
+  -d '{"email":"test@example.com","password":"secret","username":"testuser","firstName":"John","lastName":"Doe","isExternal":false}'
 ```
 Response example:
 ```json
