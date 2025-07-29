@@ -3,6 +3,8 @@ package com.ubb.eventapp.service.impl;
 import com.ubb.eventapp.model.Event;
 import com.ubb.eventapp.model.ValidationState;
 import com.ubb.eventapp.repository.EventRepository;
+import com.ubb.eventapp.repository.EventReviewRepository;
+import com.ubb.eventapp.repository.RegistrationRepository;
 import com.ubb.eventapp.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
+    private final EventReviewRepository eventReviewRepository;
+    private final RegistrationRepository registrationRepository;
 
     @Override
     public Event createEvent(Event event) {
@@ -37,6 +41,9 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEvent(Long eventId) {
         eventRepository.findById(eventId).orElseThrow();
+        // Remove dependent records first to satisfy foreign key constraints
+        registrationRepository.deleteByEvent_Id(eventId);
+        eventReviewRepository.deleteById(eventId);
         eventRepository.deleteById(eventId);
     }
 
