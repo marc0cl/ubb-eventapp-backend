@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface SupportTicketService {
     SupportTicket openTicket(SupportTicket ticket);
-    SupportTicket closeTicket(String ticketId);
-    Optional<SupportTicket> findById(String id);
+    SupportTicket closeTicket(Integer ticketId);
+    Optional<SupportTicket> findById(Integer id);
 }

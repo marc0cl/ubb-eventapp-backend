@@ -19,12 +19,12 @@ public class SupportTicketController {
     }
 
     @PostMapping("/{id}/close")
-    public ResponseEntity<SupportTicket> close(@PathVariable String id) {
+    public ResponseEntity<SupportTicket> close(@PathVariable Integer id) {
         return ResponseEntity.ok(service.closeTicket(id));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SupportTicket> findById(@PathVariable String id) {
+    public ResponseEntity<SupportTicket> findById(@PathVariable Integer id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

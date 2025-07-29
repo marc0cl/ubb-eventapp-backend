@@ -13,8 +13,9 @@ import java.util.Set;
 @Builder
 public class Group {
     @Id
-    @Column(name = "id_grupo", length = 36)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_grupo")
+    private Integer id;
 
     @Column(length = 120, unique = true)
     private String nombre;

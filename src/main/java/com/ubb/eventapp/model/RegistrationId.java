@@ -13,9 +13,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class RegistrationId implements Serializable {
-    @Column(name = "id_evento", length = 36)
-    private String eventId;
+    @Column(name = "id_evento")
+    private Integer eventId;
 
-    @Column(name = "id_usuario", length = 36)
-    private String userId;
+    @Column(name = "id_usuario")
+    private Integer userId;
 }

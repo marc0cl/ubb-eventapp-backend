@@ -14,8 +14,9 @@ import java.util.Set;
 @Builder
 public class User {
     @Id
-    @Column(name = "id_usuario", length = 36)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
+    private Integer id;
 
     @Column(name = "correo_ubb", length = 120, nullable = false, unique = true)
     private String correoUbb;
@@ -32,8 +33,9 @@ public class User {
     @Column(length = 80, unique = true)
     private String username;
 
-    @Column
-    private String id_campus;
+    @ManyToOne
+    @JoinColumn(name = "id_campus")
+    private Campus campus;
 
     @Column(length = 255)
     private String password;

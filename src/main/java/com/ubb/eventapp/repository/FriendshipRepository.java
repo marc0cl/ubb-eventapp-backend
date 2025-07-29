@@ -20,5 +20,5 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Friendsh
      * @return list of friendships for the user in the specified state
      */
     @Query("select f from Friendship f where (f.user1.id = :userId or f.user2.id = :userId) and f.estado = :estado")
-    List<Friendship> findByUserIdAndEstado(@Param("userId") String userId, @Param("estado") FriendshipState estado);
+    List<Friendship> findByUserIdAndEstado(@Param("userId") Integer userId, @Param("estado") FriendshipState estado);
 }

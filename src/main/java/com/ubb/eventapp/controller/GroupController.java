@@ -27,14 +27,14 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Group> findById(@PathVariable String id) {
+    public ResponseEntity<Group> findById(@PathVariable Integer id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/representative/{userId}")
-    public ResponseEntity<List<Group>> findByRepresentative(@PathVariable String userId) {
+    public ResponseEntity<List<Group>> findByRepresentative(@PathVariable Integer userId) {
         return ResponseEntity.ok(service.findByRepresentativeUser(userId));
     }
 

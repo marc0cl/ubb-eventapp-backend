@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface GroupService {
     Group createGroup(Group group);
     Group updateGroup(Group group);
-    Optional<Group> findById(String id);
+    Optional<Group> findById(Integer id);
 
     /**
      * Retrieves groups represented by the specified user.
@@ -17,7 +17,7 @@ public interface GroupService {
      * @param userId the representative user id
      * @return list of groups where the user is representative
      */
-    List<Group> findByRepresentativeUser(String userId);
+    List<Group> findByRepresentativeUser(Integer userId);
 
     /**
      * Retrieves groups that contain any of the provided tags.

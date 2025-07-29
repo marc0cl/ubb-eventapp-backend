@@ -30,13 +30,13 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Group> findById(String id) {
+    public Optional<Group> findById(Integer id) {
         return groupRepository.findById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Group> findByRepresentativeUser(String userId) {
+    public List<Group> findByRepresentativeUser(Integer userId) {
         return groupRepository.findByRepresentativeUser(userId);
     }
 

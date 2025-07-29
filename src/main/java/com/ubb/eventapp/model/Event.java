@@ -14,8 +14,9 @@ import java.time.LocalDateTime;
 @Builder
 public class Event {
     @Id
-    @Column(name = "id_evento", length = 36)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_evento")
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "origen_tipo")
