@@ -5,6 +5,7 @@ import com.ubb.eventapp.model.FriendshipId;
 import java.util.List;
 
 import java.util.Optional;
+import com.ubb.eventapp.model.User;
 
 public interface FriendshipService {
     Friendship requestFriendship(Friendship friendship);
@@ -12,4 +13,6 @@ public interface FriendshipService {
     Friendship rejectFriendship(FriendshipId id);
     List<Friendship> findPendingFriendships(Long userId);
     Optional<Friendship> findById(FriendshipId id);
+    List<User> findFriends(Long userId);
+    void deleteFriendship(FriendshipId id);
 }
