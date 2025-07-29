@@ -158,8 +158,7 @@ public class UserServiceImpl implements UserService {
 
         java.util.List<User> candidates = userRepository.findAll().stream()
                 .filter(u -> !excluded.contains(u.getId()))
-                .toList();
-        java.util.Collections.shuffle(candidates);
+                .collect(java.util.stream.Collectors.toCollection(java.util.ArrayList::new));
         return candidates.size() > 10 ? candidates.subList(0, 10) : candidates;
     }
 }
