@@ -21,29 +21,29 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable Integer id) {
+    public ResponseEntity<User> findById(@PathVariable Long id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}/summary")
-    public ResponseEntity<ProfileSummary> getSummary(@PathVariable Integer id) {
+    public ResponseEntity<ProfileSummary> getSummary(@PathVariable Long id) {
         return ResponseEntity.ok(service.getProfileSummary(id));
     }
 
     @GetMapping("/{id}/events")
-    public ResponseEntity<ProfileEvents> getProfileEvents(@PathVariable Integer id) {
+    public ResponseEntity<ProfileEvents> getProfileEvents(@PathVariable Long id) {
         return ResponseEntity.ok(service.getProfileEvents(id));
     }
 
     @GetMapping("/{id}/calendar")
-    public ResponseEntity<List<CalendarEntry>> getCalendar(@PathVariable Integer id) {
+    public ResponseEntity<List<CalendarEntry>> getCalendar(@PathVariable Long id) {
         return ResponseEntity.ok(service.getEventCalendar(id));
     }
 
     @GetMapping("/{id}/to-attend")
-    public ResponseEntity<EventsToAttend> eventsToAttend(@PathVariable Integer id) {
+    public ResponseEntity<EventsToAttend> eventsToAttend(@PathVariable Long id) {
         return ResponseEntity.ok(service.getEventsToAttend(id));
     }
 }

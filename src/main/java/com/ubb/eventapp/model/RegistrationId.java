@@ -14,8 +14,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class RegistrationId implements Serializable {
     @Column(name = "id_evento")
-    private Integer eventId;
+    private Long eventId;
 
     @Column(name = "id_usuario")
-    private Integer userId;
+    private Long userId;
 }

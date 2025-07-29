@@ -28,24 +28,24 @@ public class EventController {
     }
 
     @PostMapping("/{id}/approve")
-    public ResponseEntity<Event> approve(@PathVariable Integer id) {
+    public ResponseEntity<Event> approve(@PathVariable Long id) {
         return ResponseEntity.ok(service.approveEvent(id));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Event> findById(@PathVariable Integer id) {
+    public ResponseEntity<Event> findById(@PathVariable Long id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/creator/{userId}")
-    public ResponseEntity<List<Event>> findByCreator(@PathVariable Integer userId) {
+    public ResponseEntity<List<Event>> findByCreator(@PathVariable Long userId) {
         return ResponseEntity.ok(service.findByCreator(userId));
     }
 
     @GetMapping("/group/{groupId}")
-    public ResponseEntity<List<Event>> findByGroup(@PathVariable Integer groupId) {
+    public ResponseEntity<List<Event>> findByGroup(@PathVariable Long groupId) {
         return ResponseEntity.ok(service.findByGroup(groupId));
     }
 
@@ -57,7 +57,7 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Event>> findByIds(@RequestParam("ids") List<Integer> ids) {
+    public ResponseEntity<List<Event>> findByIds(@RequestParam("ids") List<Long> ids) {
         return ResponseEntity.ok(service.findByIds(ids));
     }
 }

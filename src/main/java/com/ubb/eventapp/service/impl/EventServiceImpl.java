@@ -28,7 +28,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event approveEvent(Integer eventId) {
+    public Event approveEvent(Long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow();
         event.setEstadoValidacion(ValidationState.APROBADO);
         return eventRepository.save(event);
@@ -36,19 +36,19 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Event> findById(Integer id) {
+    public Optional<Event> findById(Long id) {
         return eventRepository.findById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public java.util.List<Event> findByCreator(Integer userId) {
+    public java.util.List<Event> findByCreator(Long userId) {
         return eventRepository.findByCreador_Id(userId);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public java.util.List<Event> findByGroup(Integer groupId) {
+    public java.util.List<Event> findByGroup(Long groupId) {
         return eventRepository.findByGrupo_Id(groupId);
     }
 
@@ -60,7 +60,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional(readOnly = true)
-    public java.util.List<Event> findByIds(java.util.List<Integer> ids) {
+    public java.util.List<Event> findByIds(java.util.List<Long> ids) {
         return ids == null || ids.isEmpty() ? java.util.Collections.emptyList() :
                 eventRepository.findAllById(ids);
     }

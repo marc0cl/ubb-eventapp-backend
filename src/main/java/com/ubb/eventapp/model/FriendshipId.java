@@ -14,8 +14,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class FriendshipId implements Serializable {
     @Column(name = "id_usr1")
-    private Integer user1Id;
+    private Long user1Id;
 
     @Column(name = "id_usr2")
-    private Integer user2Id;
+    private Long user2Id;
 }

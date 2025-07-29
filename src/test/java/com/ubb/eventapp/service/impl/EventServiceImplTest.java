@@ -26,11 +26,11 @@ public class EventServiceImplTest {
 
     @Test
     void approveEvent_setsStateToApprovedAndSaves() {
-        Event event = Event.builder().id("1").estadoValidacion(ValidationState.PENDIENTE).build();
-        when(eventRepository.findById("1")).thenReturn(Optional.of(event));
+        Event event = Event.builder().id(1L).estadoValidacion(ValidationState.PENDIENTE).build();
+        when(eventRepository.findById(1L)).thenReturn(Optional.of(event));
         when(eventRepository.save(any(Event.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        Event result = service.approveEvent("1");
+        Event result = service.approveEvent(1L);
 
         assertEquals(ValidationState.APROBADO, result.getEstadoValidacion());
         ArgumentCaptor<Event> captor = ArgumentCaptor.forClass(Event.class);
@@ -40,10 +40,10 @@ public class EventServiceImplTest {
 
     @Test
     void findByIds_delegatesToRepository() {
-        when(eventRepository.findAllById(List.of("e1", "e2"))).thenReturn(List.of(new Event(), new Event()));
+        when(eventRepository.findAllById(List.of(1L, 2L))).thenReturn(List.of(new Event(), new Event()));
 
-        service.findByIds(List.of("e1", "e2"));
+        service.findByIds(List.of(1L, 2L));
 
-        verify(eventRepository).findAllById(List.of("e1", "e2"));
+        verify(eventRepository).findAllById(List.of(1L, 2L));
     }
 }
