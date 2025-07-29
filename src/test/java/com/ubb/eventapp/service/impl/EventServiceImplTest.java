@@ -2,6 +2,7 @@ package com.ubb.eventapp.service.impl;
 
 import com.ubb.eventapp.model.Event;
 import com.ubb.eventapp.model.ValidationState;
+import com.ubb.eventapp.model.Visibility;
 import com.ubb.eventapp.repository.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,5 +46,12 @@ public class EventServiceImplTest {
         service.findByIds(List.of(1L, 2L));
 
         verify(eventRepository).findAllById(List.of(1L, 2L));
+    }
+
+    @Test
+    void findPublicEvents_delegatesToRepository() {
+        service.findPublicEvents();
+
+        verify(eventRepository).findByVisibilidad(Visibility.PUBLICO);
     }
 }

@@ -15,6 +15,13 @@ public interface EventService {
     java.util.List<Event> findUpcomingEvents(java.time.LocalDateTime after);
 
     /**
+     * Retrieves all public events.
+     *
+     * @return list of events with PUBLICO visibility
+     */
+    java.util.List<Event> findPublicEvents();
+
+    /**
      * Retrieves the events with the provided identifiers.
      *
      * @param ids list of event ids

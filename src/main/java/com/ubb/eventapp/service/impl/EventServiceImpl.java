@@ -60,6 +60,12 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional(readOnly = true)
+    public java.util.List<Event> findPublicEvents() {
+        return eventRepository.findByVisibilidad(com.ubb.eventapp.model.Visibility.PUBLICO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public java.util.List<Event> findByIds(java.util.List<Long> ids) {
         return ids == null || ids.isEmpty() ? java.util.Collections.emptyList() :
                 eventRepository.findAllById(ids);
