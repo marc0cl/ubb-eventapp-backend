@@ -13,14 +13,15 @@ This document describes the available REST endpoints. All examples assume the se
   "password": "secret",
   "username": "user",
   "firstName": "John",
-  "lastName": "Doe"
+  "lastName": "Doe",
+  "isExternal": false
 }
 ```
 - **Curl example**:
 ```bash
 curl -X POST http://localhost:8080/auth/register \
   -H 'Content-Type: application/json' \
-  -d '{"email":"user@example.com","password":"secret","username":"user","firstName":"John","lastName":"Doe"}'
+  -d '{"email":"user@example.com","password":"secret","username":"user","firstName":"John","lastName":"Doe","isExternal":false}'
 ```
 - **Response**:
 ```json
