@@ -81,6 +81,8 @@ public class UserServiceImplTest {
                 .build();
         when(registrationRepository.findByUser_IdAndEstado(1L, RegistrationState.INSCRITO))
                 .thenReturn(List.of(toAttend));
+        when(eventRepository.findAllById(List.of(3L)))
+                .thenReturn(List.of(toAttend.getEvent()));
 
         ProfileEvents result = service.getProfileEvents(1L);
 
