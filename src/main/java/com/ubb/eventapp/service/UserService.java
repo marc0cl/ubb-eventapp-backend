@@ -45,4 +45,13 @@ public interface UserService {
      * @return wrapper object with event ids
      */
     EventsToAttend getEventsToAttend(Long userId);
+
+    /**
+     * Suggests up to ten random users that are not already connected to the
+     * given user through a friendship relation.
+     *
+     * @param userId id of the user requesting recommendations
+     * @return list of recommended users
+     */
+    java.util.List<User> recommendUsers(Long userId);
 }

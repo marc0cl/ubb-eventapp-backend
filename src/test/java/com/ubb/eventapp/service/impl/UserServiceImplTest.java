@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -113,5 +115,47 @@ public class UserServiceImplTest {
         List<Long> ids = result.getEventIds();
 
         assertEquals(List.of(1L, 2L), ids);
+    }
+
+    @Test
+    void recommendUsers_omitsExistingRelationsAndLimitsToTen() {
+        Long userId = 1L;
+        java.util.List<User> allUsers = new java.util.ArrayList<>();
+        for (long i = 1; i <= 16; i++) {
+            allUsers.add(User.builder().id(i).build());
+        }
+        when(userRepository.findAll()).thenReturn(allUsers);
+
+        Friendship accepted = Friendship.builder()
+                .user1(User.builder().id(userId).build())
+                .user2(User.builder().id(2L).build())
+                .estado(FriendshipState.ACEPTADA)
+                .build();
+        Friendship blocked = Friendship.builder()
+                .user1(User.builder().id(userId).build())
+                .user2(User.builder().id(3L).build())
+                .estado(FriendshipState.BLOQUEADA)
+                .build();
+        Friendship pending = Friendship.builder()
+                .user1(User.builder().id(userId).build())
+                .user2(User.builder().id(4L).build())
+                .estado(FriendshipState.PENDIENTE)
+                .build();
+
+        when(friendshipRepository.findByUserIdAndEstado(userId, FriendshipState.ACEPTADA))
+                .thenReturn(java.util.List.of(accepted));
+        when(friendshipRepository.findByUserIdAndEstado(userId, FriendshipState.BLOQUEADA))
+                .thenReturn(java.util.List.of(blocked));
+        when(friendshipRepository.findByUserIdAndEstado(userId, FriendshipState.PENDIENTE))
+                .thenReturn(java.util.List.of(pending));
+
+        java.util.List<User> result = service.recommendUsers(userId);
+
+        assertEquals(10, result.size());
+        java.util.Set<Long> ids = result.stream().map(User::getId).collect(java.util.stream.Collectors.toSet());
+        assertFalse(ids.contains(1L));
+        assertFalse(ids.contains(2L));
+        assertFalse(ids.contains(3L));
+        assertFalse(ids.contains(4L));
     }
 }

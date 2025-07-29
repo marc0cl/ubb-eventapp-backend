@@ -144,4 +144,22 @@ public class UserServiceImpl implements UserService {
                 .eventIds(ids)
                 .build();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<User> recommendUsers(Long userId) {
+        java.util.Set<Long> excluded = new java.util.HashSet<>();
+        excluded.add(userId);
+        for (com.ubb.eventapp.model.FriendshipState state : com.ubb.eventapp.model.FriendshipState.values()) {
+            friendshipRepository.findByUserIdAndEstado(userId, state).stream()
+                    .map(f -> f.getUser1().getId().equals(userId) ? f.getUser2().getId() : f.getUser1().getId())
+                    .forEach(excluded::add);
+        }
+
+        java.util.List<User> candidates = userRepository.findAll().stream()
+                .filter(u -> !excluded.contains(u.getId()))
+                .toList();
+        java.util.Collections.shuffle(candidates);
+        return candidates.size() > 10 ? candidates.subList(0, 10) : candidates;
+    }
 }
