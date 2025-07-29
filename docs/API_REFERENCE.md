@@ -141,6 +141,17 @@ curl http://localhost:8080/users/1/to-attend
 {"eventIds": [1, 3, 5]}
 ```
 
+### User Recommendations
+- **GET** `/users/{id}/recommendations`
+- **Curl**:
+```bash
+curl http://localhost:8080/users/1/recommendations
+```
+- **Response**:
+```json
+[ {"id": 3, "username": "ana"} ]
+```
+
 ## Events
 
 ### Create Event
@@ -362,6 +373,28 @@ curl -X POST http://localhost:8080/friendships/accept \
   -d '{"user1Id":1,"user2Id":2}'
 ```
 - **Response**: updated `Friendship`.
+
+### Reject Friendship
+- **POST** `/friendships/reject`
+- **Request body**:
+```json
+{"user1Id": 1, "user2Id": 2}
+```
+- **Curl**:
+```bash
+curl -X POST http://localhost:8080/friendships/reject \
+  -H 'Content-Type: application/json' \
+  -d '{"user1Id":1,"user2Id":2}'
+```
+- **Response**: updated `Friendship`.
+
+### Pending Friendships
+- **GET** `/friendships/pending/{userId}`
+- **Curl**:
+```bash
+curl http://localhost:8080/friendships/pending/1
+```
+- **Response**: list of `Friendship`.
 
 ### Get Friendship
 - **GET** `/friendships/{user1}/{user2}`

@@ -133,6 +133,19 @@ Response example:
 }
 ```
 
+### `GET /users/{id}/recommendations`
+Returns up to 10 random users that are not yet friends.
+
+```bash
+curl "$BASE_URL/users/1/recommendations"
+```
+Response example:
+```json
+[
+  {"id": 3, "username": "ana"}
+]
+```
+
 ## Events
 
 ### `POST /events`
@@ -239,6 +252,18 @@ curl -X POST "$BASE_URL/friendships/accept" \
   -H "Content-Type: application/json" \
   -d '{"user1Id":1,"user2Id":2}'
 ```
+
+### `POST /friendships/reject`
+Rejects a friendship request.
+
+```bash
+curl -X POST "$BASE_URL/friendships/reject" \
+  -H "Content-Type: application/json" \
+  -d '{"user1Id":1,"user2Id":2}'
+```
+
+### `GET /friendships/pending/{userId}`
+Lists pending friendship requests for a user.
 
 ### `GET /friendships/{user1}/{user2}`
 Gets friendship info.

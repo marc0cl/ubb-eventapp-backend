@@ -46,4 +46,9 @@ public class UserController {
     public ResponseEntity<EventsToAttend> eventsToAttend(@PathVariable Long id) {
         return ResponseEntity.ok(service.getEventsToAttend(id));
     }
+
+    @GetMapping("/{id}/recommendations")
+    public ResponseEntity<List<User>> recommendations(@PathVariable Long id) {
+        return ResponseEntity.ok(service.recommendUsers(id));
+    }
 }

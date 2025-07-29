@@ -31,6 +31,19 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     @Override
+    public Friendship rejectFriendship(FriendshipId id) {
+        Friendship friendship = friendshipRepository.findById(id).orElseThrow();
+        friendship.setEstado(FriendshipState.BLOQUEADA);
+        return friendshipRepository.save(friendship);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<Friendship> findPendingFriendships(Long userId) {
+        return friendshipRepository.findByUserIdAndEstado(userId, FriendshipState.PENDIENTE);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<Friendship> findById(FriendshipId id) {
         return friendshipRepository.findById(id);

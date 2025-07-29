@@ -24,6 +24,16 @@ public class FriendshipController {
         return ResponseEntity.ok(service.acceptFriendship(id));
     }
 
+    @PostMapping("/reject")
+    public ResponseEntity<Friendship> reject(@RequestBody FriendshipId id) {
+        return ResponseEntity.ok(service.rejectFriendship(id));
+    }
+
+    @GetMapping("/pending/{userId}")
+    public ResponseEntity<java.util.List<Friendship>> pending(@PathVariable Long userId) {
+        return ResponseEntity.ok(service.findPendingFriendships(userId));
+    }
+
     @GetMapping("/{user1}/{user2}")
     public ResponseEntity<Friendship> findById(@PathVariable Long user1, @PathVariable Long user2) {
         FriendshipId id = new FriendshipId(user1, user2);
