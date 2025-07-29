@@ -26,3 +26,4 @@ A standard Java 17 JDK and Maven 3.8+ are required. See `agent.md` for a full bu
 
 ## Documentation
 Detailed table definitions can be found in [docs/DATABASE.md](docs/DATABASE.md).
+API routes and example requests are documented in [docs/API_REFERENCE.md](docs/API_REFERENCE.md).
