@@ -233,6 +233,20 @@ curl "http://localhost:8080/events/upcoming?after=2025-01-01T00:00:00"
 ]
 ```
 
+### Public Events
+- **GET** `/events/public`
+
+Example:
+```bash
+curl http://localhost:8080/events/public
+```
+- **Response**:
+```json
+[
+  {"id":1,"titulo":"Charla"}
+]
+```
+
 ### Events By Ids
 - **GET** `/events?ids=1,2,3`
 

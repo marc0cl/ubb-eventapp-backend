@@ -170,6 +170,9 @@ Lists events belonging to a group.
 ### `GET /events/upcoming?after={datetime}`
 Lists upcoming events after the given ISO date-time.
 
+### `GET /events/public`
+Lists all public events.
+
 ### `GET /events?ids=1&ids=2`
 Fetches multiple events by id.
 

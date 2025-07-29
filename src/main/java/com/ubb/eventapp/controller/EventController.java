@@ -49,6 +49,11 @@ public class EventController {
         return ResponseEntity.ok(service.findByGroup(groupId));
     }
 
+    @GetMapping("/public")
+    public ResponseEntity<List<Event>> findPublic() {
+        return ResponseEntity.ok(service.findPublicEvents());
+    }
+
     @GetMapping("/upcoming")
     public ResponseEntity<List<Event>> findUpcoming(@RequestParam(required = false)
                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
