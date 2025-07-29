@@ -17,4 +17,11 @@ public interface RegistrationRepository extends JpaRepository<Registration, Regi
      * @return list of registrations that match
      */
     List<Registration> findByUser_IdAndEstado(Long userId, RegistrationState estado);
+
+    /**
+     * Deletes all registrations associated with the provided event.
+     *
+     * @param eventId identifier of the event
+     */
+    void deleteByEvent_Id(Long eventId);
 }
