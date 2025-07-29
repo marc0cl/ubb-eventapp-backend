@@ -19,10 +19,10 @@ Defaults are provided for local development if not set.
 Run the Maven build and tests using:
 
 ```bash
-mvn -B clean verify
+./build.sh
 ```
 
-A standard Java 17 JDK and Maven 3.8+ are required. See `agent.md` for a full build recipe.
+A standard Java 17 JDK and Maven 3.8+ are required. See `build.sh` for a full build recipe derived from `agent.md`.
 
 ## Documentation
 Detailed table definitions can be found in [docs/DATABASE.md](docs/DATABASE.md).

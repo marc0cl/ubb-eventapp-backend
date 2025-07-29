@@ -17,7 +17,8 @@ public class JwtServiceTest {
     @BeforeEach
     void setup() {
         service = new JwtService();
-        String key = Base64.getEncoder().encodeToString("test-key".getBytes());
+        String keyMaterial = "0123456789abcdef0123456789abcdef"; // 32 bytes
+        String key = Base64.getEncoder().encodeToString(keyMaterial.getBytes());
         ReflectionTestUtils.setField(service, "secretKey", key);
         ReflectionTestUtils.setField(service, "jwtExpiration", 3600000L);
     }
