@@ -68,8 +68,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
         User savedUser = userRepository.save(user);
         UserDetails userDetails = asUserDetails(savedUser);
-        String jwtToken = jwtService.generateToken(Map.of("userId", savedUser.getId()), userDetails);
-        String refreshToken = jwtService.generateToken(Map.of("userId", savedUser.getId()), userDetails);
+        String role = savedUser.getRoles().stream()
+                .findFirst()
+                .map(r -> r.getNombre().name())
+                .orElse("");
+        String jwtToken = jwtService.generateToken(
+                Map.of("userId", savedUser.getId(), "role", role),
+                userDetails);
+        String refreshToken = jwtService.generateToken(
+                Map.of("userId", savedUser.getId(), "role", role),
+                userDetails);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
@@ -92,8 +100,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = userRepository.findByCorreoUbb(request.getEmail())
                 .orElseThrow();
         UserDetails userDetails = asUserDetails(user);
-        String jwtToken = jwtService.generateToken(Map.of("userId", user.getId()), userDetails);
-        String refreshToken = jwtService.generateToken(Map.of("userId", user.getId()), userDetails);
+        String role = user.getRoles().stream()
+                .findFirst()
+                .map(r -> r.getNombre().name())
+                .orElse("");
+        String jwtToken = jwtService.generateToken(
+                Map.of("userId", user.getId(), "role", role),
+                userDetails);
+        String refreshToken = jwtService.generateToken(
+                Map.of("userId", user.getId(), "role", role),
+                userDetails);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
@@ -116,7 +132,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             User user = userRepository.findByCorreoUbb(userEmail).orElseThrow();
             UserDetails userDetails = asUserDetails(user);
             if (jwtService.isTokenValid(refreshToken, userDetails)) {
-                String accessToken = jwtService.generateToken(Map.of("userId", user.getId()), userDetails);
+                String role = user.getRoles().stream()
+                        .findFirst()
+                        .map(r -> r.getNombre().name())
+                        .orElse("");
+                String accessToken = jwtService.generateToken(
+                        Map.of("userId", user.getId(), "role", role),
+                        userDetails);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
                 AuthenticationResponse authResponse = AuthenticationResponse.builder()
