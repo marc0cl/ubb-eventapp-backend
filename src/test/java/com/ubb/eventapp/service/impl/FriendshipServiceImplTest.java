@@ -26,7 +26,7 @@ public class FriendshipServiceImplTest {
 
     @Test
     void acceptFriendship_setsStateToAcceptedAndSaves() {
-        FriendshipId id = new FriendshipId("u1", "u2");
+        FriendshipId id = new FriendshipId(1l, 2l);
         Friendship friendship = Friendship.builder().id(id).estado(FriendshipState.PENDIENTE).build();
         when(friendshipRepository.findById(id)).thenReturn(Optional.of(friendship));
         when(friendshipRepository.save(any(Friendship.class))).thenAnswer(invocation -> invocation.getArgument(0));

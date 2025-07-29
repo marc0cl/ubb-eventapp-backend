@@ -25,11 +25,11 @@ public class SupportTicketServiceImplTest {
 
     @Test
     void closeTicket_setsStateToClosedAndSaves() {
-        SupportTicket ticket = SupportTicket.builder().id("t1").estado(TicketState.ABIERTO).build();
-        when(supportTicketRepository.findById("t1")).thenReturn(Optional.of(ticket));
+        SupportTicket ticket = SupportTicket.builder().id(1l).estado(TicketState.ABIERTO).build();
+        when(supportTicketRepository.findById(1l)).thenReturn(Optional.of(ticket));
         when(supportTicketRepository.save(any(SupportTicket.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        SupportTicket result = service.closeTicket("t1");
+        SupportTicket result = service.closeTicket(1l);
 
         assertEquals(TicketState.CERRADO, result.getEstado());
         ArgumentCaptor<SupportTicket> captor = ArgumentCaptor.forClass(SupportTicket.class);

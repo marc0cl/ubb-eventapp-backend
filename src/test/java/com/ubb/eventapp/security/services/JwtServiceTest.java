@@ -28,7 +28,7 @@ public class JwtServiceTest {
         String token = service.generateToken(java.util.Map.of("userId", 1L), user);
         assertNotNull(token);
         assertEquals("user@test.com", service.extractUsername(token));
-        assertEquals(1L, service.extractClaim(token, c -> c.get("userId", Long.class)));
+        assertEquals(1L, (Long) service.extractClaim(token, c -> c.get("userId", Long.class)));
         assertTrue(service.isTokenValid(token, user));
     }
 }

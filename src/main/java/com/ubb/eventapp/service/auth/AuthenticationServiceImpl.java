@@ -68,15 +68,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
         User savedUser = userRepository.save(user);
         UserDetails userDetails = asUserDetails(savedUser);
-        String role = savedUser.getRoles().stream()
+        String roleString = savedUser.getRoles().stream()
                 .findFirst()
                 .map(r -> r.getNombre().name())
                 .orElse("");
         String jwtToken = jwtService.generateToken(
-                Map.of("userId", savedUser.getId(), "role", role),
+                Map.of("userId", savedUser.getId(), "role", roleString),
                 userDetails);
         String refreshToken = jwtService.generateToken(
-                Map.of("userId", savedUser.getId(), "role", role),
+                Map.of("userId", savedUser.getId(), "role", roleString),
                 userDetails);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
