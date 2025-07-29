@@ -35,6 +35,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public void deleteEvent(Long eventId) {
+        eventRepository.findById(eventId).orElseThrow();
+        eventRepository.deleteById(eventId);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<Event> findById(Long id) {
         return eventRepository.findById(id);
@@ -62,6 +68,12 @@ public class EventServiceImpl implements EventService {
     @Transactional(readOnly = true)
     public java.util.List<Event> findPublicEvents() {
         return eventRepository.findByVisibilidad(com.ubb.eventapp.model.Visibility.PUBLICO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<Event> findPendingEvents() {
+        return eventRepository.findByEstadoValidacion(ValidationState.PENDIENTE);
     }
 
     @Override
