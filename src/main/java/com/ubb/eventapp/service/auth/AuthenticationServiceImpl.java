@@ -7,6 +7,7 @@ import com.ubb.eventapp.dto.RegisterRequest;
 import com.ubb.eventapp.model.Token;
 import com.ubb.eventapp.model.TokenType;
 import com.ubb.eventapp.model.User;
+import com.ubb.eventapp.model.UserState;
 import com.ubb.eventapp.repository.TokenRepository;
 import com.ubb.eventapp.repository.UserRepository;
 import com.ubb.eventapp.security.AuthConstants;
@@ -43,6 +44,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .username(request.getUsername())
                 .nombres(request.getFirstName())
                 .apellidos(request.getLastName())
+                .estado(UserState.ACTIVO)
                 .build();
         User savedUser = userRepository.save(user);
         UserDetails userDetails = asUserDetails(savedUser);
