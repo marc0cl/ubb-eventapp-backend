@@ -253,22 +253,18 @@ curl -X POST "$BASE_URL/friendships/1/2"
 ```
 Response example is identical to the body-based variant.
 
-### `POST /friendships/accept`
+### `POST /friendships/{user1Id}/{user2Id}/accept`
 Accepts a friendship.
 
 ```bash
-curl -X POST "$BASE_URL/friendships/accept" \
-  -H "Content-Type: application/json" \
-  -d '{"user1Id":1,"user2Id":2}'
+curl -X POST "$BASE_URL/friendships/1/2/accept"
 ```
 
-### `POST /friendships/reject`
+### `POST /friendships/{user1Id}/{user2Id}/reject`
 Rejects a friendship request.
 
 ```bash
-curl -X POST "$BASE_URL/friendships/reject" \
-  -H "Content-Type: application/json" \
-  -d '{"user1Id":1,"user2Id":2}'
+curl -X POST "$BASE_URL/friendships/1/2/reject"
 ```
 
 ### `GET /friendships/pending/{userId}`
