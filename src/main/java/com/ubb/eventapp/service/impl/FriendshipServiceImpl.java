@@ -83,6 +83,13 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     @Override
     public void deleteFriendship(FriendshipId id) {
-        friendshipRepository.deleteById(id);
+        Optional<Friendship> friendshipOpt = friendshipRepository.findById(id);
+        if (friendshipOpt.isEmpty()) {
+            FriendshipId reversed = new FriendshipId(id.getUser2Id(), id.getUser1Id());
+            friendshipOpt = friendshipRepository.findById(reversed);
+        }
+        Friendship friendship = friendshipOpt.orElseThrow();
+
+        friendshipRepository.deleteById(friendship.getId());
     }
 }
