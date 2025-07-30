@@ -4,6 +4,7 @@ import com.ubb.eventapp.model.Friendship;
 import com.ubb.eventapp.model.FriendshipId;
 import com.ubb.eventapp.model.FriendshipState;
 import com.ubb.eventapp.repository.FriendshipRepository;
+import com.ubb.eventapp.repository.UserRepository;
 import com.ubb.eventapp.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +18,14 @@ import static org.mockito.Mockito.*;
 public class FriendshipServiceImplTest {
 
     private FriendshipRepository friendshipRepository;
+    private UserRepository userRepository;
     private FriendshipServiceImpl service;
 
     @BeforeEach
     void setup() {
         friendshipRepository = mock(FriendshipRepository.class);
-        service = new FriendshipServiceImpl(friendshipRepository);
+        userRepository = mock(UserRepository.class);
+        service = new FriendshipServiceImpl(friendshipRepository, userRepository);
     }
 
     @Test
@@ -83,5 +86,24 @@ public class FriendshipServiceImplTest {
         service.deleteFriendship(id);
 
         verify(friendshipRepository).deleteById(id);
+    }
+
+    @Test
+    void requestFriendship_populatesUsersFromIds() {
+        FriendshipId id = new FriendshipId(1L, 2L);
+        User u1 = User.builder().id(1L).build();
+        User u2 = User.builder().id(2L).build();
+        Friendship friendship = Friendship.builder().id(id).build();
+
+        when(userRepository.getReferenceById(1L)).thenReturn(u1);
+        when(userRepository.getReferenceById(2L)).thenReturn(u2);
+        when(friendshipRepository.save(any(Friendship.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        Friendship result = service.requestFriendship(friendship);
+
+        assertSame(u1, result.getUser1());
+        assertSame(u2, result.getUser2());
+        verify(friendshipRepository).save(friendship);
     }
 }

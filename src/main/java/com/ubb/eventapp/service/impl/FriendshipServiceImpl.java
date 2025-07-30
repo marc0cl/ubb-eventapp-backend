@@ -4,6 +4,7 @@ import com.ubb.eventapp.model.Friendship;
 import com.ubb.eventapp.model.FriendshipId;
 import com.ubb.eventapp.model.FriendshipState;
 import com.ubb.eventapp.repository.FriendshipRepository;
+import com.ubb.eventapp.repository.UserRepository;
 import com.ubb.eventapp.service.FriendshipService;
 import com.ubb.eventapp.model.User;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,22 @@ import java.util.Optional;
 public class FriendshipServiceImpl implements FriendshipService {
 
     private final FriendshipRepository friendshipRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Friendship requestFriendship(Friendship friendship) {
+        if (friendship.getId() == null) {
+            throw new IllegalArgumentException("Friendship id cannot be null");
+        }
+
+        if (friendship.getUser1() == null && friendship.getId().getUser1Id() != null) {
+            friendship.setUser1(userRepository.getReferenceById(friendship.getId().getUser1Id()));
+        }
+
+        if (friendship.getUser2() == null && friendship.getId().getUser2Id() != null) {
+            friendship.setUser2(userRepository.getReferenceById(friendship.getId().getUser2Id()));
+        }
+
         return friendshipRepository.save(friendship);
     }
 
