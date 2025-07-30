@@ -11,7 +11,14 @@ public interface FriendshipService {
     Friendship requestFriendship(Friendship friendship);
     Friendship acceptFriendship(FriendshipId id);
     Friendship rejectFriendship(FriendshipId id);
-    List<Friendship> findPendingFriendships(Long userId);
+    /**
+     * Lists the users that have a pending friendship relation with the given
+     * user.
+     *
+     * @param userId identifier of the user
+     * @return users awaiting this user's response
+     */
+    java.util.List<User> findPendingFriendships(Long userId);
     Optional<Friendship> findById(FriendshipId id);
     List<User> findFriends(Long userId);
     void deleteFriendship(FriendshipId id);

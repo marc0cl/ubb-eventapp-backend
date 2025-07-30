@@ -39,7 +39,7 @@ public class FriendshipController {
     }
 
     @GetMapping("/pending/{userId}")
-    public ResponseEntity<java.util.List<Friendship>> pending(@PathVariable Long userId) {
+    public ResponseEntity<java.util.List<com.ubb.eventapp.model.User>> pending(@PathVariable Long userId) {
         return ResponseEntity.ok(service.findPendingFriendships(userId));
     }
 
