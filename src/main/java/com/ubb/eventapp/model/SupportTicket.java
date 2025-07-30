@@ -23,6 +23,7 @@ public class SupportTicket {
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TicketState estado = TicketState.ABIERTO;

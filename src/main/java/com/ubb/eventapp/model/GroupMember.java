@@ -24,6 +24,7 @@ public class GroupMember {
     @JoinColumn(name = "id_usuario")
     private User user;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "rol_grupo", nullable = false)
     private GroupRole rolGrupo = GroupRole.USUARIO;

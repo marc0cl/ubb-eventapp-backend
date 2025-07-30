@@ -40,6 +40,7 @@ public class User {
     @Column(length = 255)
     private String password;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserState estado = UserState.ACTIVO;
