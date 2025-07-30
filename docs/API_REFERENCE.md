@@ -360,6 +360,14 @@ curl -X POST http://localhost:8080/friendships \
 ```
 - **Response**: `Friendship`.
 
+You can also pass the ids in the path:
+
+- **POST** `/friendships/{user1Id}/{user2Id}`
+```bash
+curl -X POST http://localhost:8080/friendships/1/2
+```
+Response body is the same as above.
+
 ### Accept Friendship
 - **POST** `/friendships/accept`
 - **Request body**:

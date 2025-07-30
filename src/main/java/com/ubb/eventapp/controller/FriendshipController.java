@@ -19,6 +19,15 @@ public class FriendshipController {
         return ResponseEntity.ok(service.requestFriendship(friendship));
     }
 
+    @PostMapping("/{user1Id}/{user2Id}")
+    public ResponseEntity<Friendship> requestByIds(@PathVariable Long user1Id,
+                                                   @PathVariable Long user2Id) {
+        Friendship friendship = Friendship.builder()
+                .id(new FriendshipId(user1Id, user2Id))
+                .build();
+        return ResponseEntity.ok(service.requestFriendship(friendship));
+    }
+
     @PostMapping("/accept")
     public ResponseEntity<Friendship> accept(@RequestBody FriendshipId id) {
         return ResponseEntity.ok(service.acceptFriendship(id));
