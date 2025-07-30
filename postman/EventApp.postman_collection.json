@@ -258,17 +258,14 @@
           "name": "Accept Friendship",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"user1Id\": \"user1\", \"user2Id\": \"user2\"}"
-            },
-            "url": "{{baseUrl}}/friendships/accept"
+            "url": "{{baseUrl}}/friendships/:user1/:user2/accept"
+          }
+        },
+        {
+          "name": "Reject Friendship",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/friendships/:user1/:user2/reject"
           }
         },
         {

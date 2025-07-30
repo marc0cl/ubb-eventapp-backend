@@ -10,7 +10,12 @@ import com.ubb.eventapp.model.User;
 public interface FriendshipService {
     Friendship requestFriendship(Friendship friendship);
     Friendship acceptFriendship(FriendshipId id);
-    Friendship rejectFriendship(FriendshipId id);
+    /**
+     * Removes a pending friendship request.
+     *
+     * @param id identifier of the friendship
+     */
+    void rejectFriendship(FriendshipId id);
     /**
      * Lists the users that have a pending friendship relation with the given
      * user.

@@ -28,14 +28,19 @@ public class FriendshipController {
         return ResponseEntity.ok(service.requestFriendship(friendship));
     }
 
-    @PostMapping("/accept")
-    public ResponseEntity<Friendship> accept(@RequestBody FriendshipId id) {
+    @PostMapping("/{user1Id}/{user2Id}/accept")
+    public ResponseEntity<Friendship> accept(@PathVariable Long user1Id,
+                                             @PathVariable Long user2Id) {
+        FriendshipId id = new FriendshipId(user1Id, user2Id);
         return ResponseEntity.ok(service.acceptFriendship(id));
     }
 
-    @PostMapping("/reject")
-    public ResponseEntity<Friendship> reject(@RequestBody FriendshipId id) {
-        return ResponseEntity.ok(service.rejectFriendship(id));
+    @PostMapping("/{user1Id}/{user2Id}/reject")
+    public ResponseEntity<Void> reject(@PathVariable Long user1Id,
+                                       @PathVariable Long user2Id) {
+        FriendshipId id = new FriendshipId(user1Id, user2Id);
+        service.rejectFriendship(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/pending/{userId}")
