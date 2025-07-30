@@ -8,4 +8,5 @@ public interface SupportTicketService {
     SupportTicket openTicket(SupportTicket ticket);
     SupportTicket closeTicket(Long ticketId);
     Optional<SupportTicket> findById(Long id);
+    java.util.List<SupportTicket> findAll();
 }
