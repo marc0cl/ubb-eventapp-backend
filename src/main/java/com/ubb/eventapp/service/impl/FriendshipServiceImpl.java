@@ -58,7 +58,7 @@ public class FriendshipServiceImpl implements FriendshipService {
         return friendshipRepository
                 .findByUserIdAndEstado(userId, FriendshipState.PENDIENTE)
                 .stream()
-                .map(f -> f.getUser1().getId().equals(userId) ? f.getUser2() : f.getUser1())
+                .map(Friendship::getUser1)
                 .toList();
     }
 
