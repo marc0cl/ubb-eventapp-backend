@@ -40,7 +40,12 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     @Override
     public Friendship acceptFriendship(FriendshipId id) {
-        Friendship friendship = friendshipRepository.findById(id).orElseThrow();
+        Optional<Friendship> friendshipOpt = friendshipRepository.findById(id);
+        if (friendshipOpt.isEmpty()) {
+            FriendshipId reversed = new FriendshipId(id.getUser2Id(), id.getUser1Id());
+            friendshipOpt = friendshipRepository.findById(reversed);
+        }
+        Friendship friendship = friendshipOpt.orElseThrow();
         friendship.setEstado(FriendshipState.ACEPTADA);
         return friendshipRepository.save(friendship);
     }

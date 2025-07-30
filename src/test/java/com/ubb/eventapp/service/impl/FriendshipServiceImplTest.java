@@ -44,6 +44,23 @@ public class FriendshipServiceImplTest {
     }
 
     @Test
+    void acceptFriendship_looksForReverseIdIfNotFound() {
+        FriendshipId id = new FriendshipId(1L, 2L);
+        FriendshipId reversed = new FriendshipId(2L, 1L);
+        Friendship friendship = Friendship.builder().id(reversed).estado(FriendshipState.PENDIENTE).build();
+        when(friendshipRepository.findById(id)).thenReturn(Optional.empty());
+        when(friendshipRepository.findById(reversed)).thenReturn(Optional.of(friendship));
+        when(friendshipRepository.save(any(Friendship.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        Friendship result = service.acceptFriendship(id);
+
+        assertEquals(FriendshipState.ACEPTADA, result.getEstado());
+        verify(friendshipRepository).findById(id);
+        verify(friendshipRepository).findById(reversed);
+        verify(friendshipRepository).save(friendship);
+    }
+
+    @Test
     void rejectFriendship_deletesRequest() {
         FriendshipId id = new FriendshipId(1L, 2L);
 
