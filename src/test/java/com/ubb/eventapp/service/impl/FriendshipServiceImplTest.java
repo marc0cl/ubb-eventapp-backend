@@ -104,6 +104,7 @@ public class FriendshipServiceImplTest {
 
         assertSame(u1, result.getUser1());
         assertSame(u2, result.getUser2());
+        assertEquals(FriendshipState.PENDIENTE, result.getEstado());
         verify(friendshipRepository).save(friendship);
     }
 }

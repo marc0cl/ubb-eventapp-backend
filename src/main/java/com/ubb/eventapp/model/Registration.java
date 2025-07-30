@@ -24,6 +24,7 @@ public class Registration {
     @JoinColumn(name = "id_usuario")
     private User user;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RegistrationState estado = RegistrationState.INSCRITO;

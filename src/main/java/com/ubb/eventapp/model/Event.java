@@ -18,6 +18,7 @@ public class Event {
     @Column(name = "id_evento")
     private Long id;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "origen_tipo")
     private EventSourceType origenTipo = EventSourceType.USUARIO;
@@ -48,9 +49,11 @@ public class Event {
     @Column(name = "aforo_max")
     private Integer aforoMax;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     private Visibility visibilidad = Visibility.PUBLICO;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_validacion")
     private ValidationState estadoValidacion = ValidationState.PENDIENTE;

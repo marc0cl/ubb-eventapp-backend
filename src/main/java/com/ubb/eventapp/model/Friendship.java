@@ -14,6 +14,7 @@ public class Friendship {
     @EmbeddedId
     private FriendshipId id;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private FriendshipState estado = FriendshipState.PENDIENTE;

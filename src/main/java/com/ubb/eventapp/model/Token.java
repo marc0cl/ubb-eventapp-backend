@@ -17,6 +17,7 @@ public class Token {
     @Column(unique = true, name = "access_token")
     private String accessToken;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     private TokenType tokenType = TokenType.BEARER;
 
