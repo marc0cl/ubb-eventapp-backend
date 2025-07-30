@@ -54,8 +54,12 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     @Override
     @Transactional(readOnly = true)
-    public java.util.List<Friendship> findPendingFriendships(Long userId) {
-        return friendshipRepository.findByUserIdAndEstado(userId, FriendshipState.PENDIENTE);
+    public java.util.List<User> findPendingFriendships(Long userId) {
+        return friendshipRepository
+                .findByUserIdAndEstado(userId, FriendshipState.PENDIENTE)
+                .stream()
+                .map(f -> f.getUser1().getId().equals(userId) ? f.getUser2() : f.getUser1())
+                .toList();
     }
 
     @Override
