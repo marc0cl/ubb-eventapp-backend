@@ -36,4 +36,11 @@ public class SupportTicketServiceImplTest {
         verify(supportTicketRepository).save(captor.capture());
         assertEquals(TicketState.CERRADO, captor.getValue().getEstado());
     }
+
+    @Test
+    void findAll_delegatesToRepository() {
+        service.findAll();
+
+        verify(supportTicketRepository).findAll();
+    }
 }

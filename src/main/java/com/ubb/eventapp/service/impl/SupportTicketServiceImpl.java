@@ -34,4 +34,10 @@ public class SupportTicketServiceImpl implements SupportTicketService {
     public Optional<SupportTicket> findById(Long id) {
         return supportTicketRepository.findById(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.util.List<SupportTicket> findAll() {
+        return supportTicketRepository.findAll();
+    }
 }

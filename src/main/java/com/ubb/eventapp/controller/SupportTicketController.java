@@ -13,6 +13,11 @@ public class SupportTicketController {
 
     private final SupportTicketService service;
 
+    @GetMapping
+    public ResponseEntity<java.util.List<SupportTicket>> findAll() {
+        return ResponseEntity.ok(service.findAll());
+    }
+
     @PostMapping
     public ResponseEntity<SupportTicket> open(@RequestBody SupportTicket ticket) {
         return ResponseEntity.ok(service.openTicket(ticket));

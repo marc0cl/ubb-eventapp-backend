@@ -317,6 +317,9 @@ Closes a ticket.
 ### `GET /tickets/{id}`
 Fetch a ticket by id.
 
+### `GET /tickets`
+Lists all tickets.
+
 ## Trophies
 
 ### `GET /trophies/{id}`

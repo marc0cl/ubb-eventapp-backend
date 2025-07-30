@@ -539,6 +539,18 @@ curl http://localhost:8080/tickets/7
 {"id":7,"descripcion":"Necesito ayuda","estado":"ABIERTO"}
 ```
 
+### List Tickets
+- **GET** `/tickets`
+```bash
+curl http://localhost:8080/tickets
+```
+- **Response**:
+```json
+[
+  {"id":7,"estado":"ABIERTO"}
+]
+```
+
 ## Trophies
 
 ### Get Trophy
