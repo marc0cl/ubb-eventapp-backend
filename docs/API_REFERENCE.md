@@ -369,32 +369,18 @@ curl -X POST http://localhost:8080/friendships/1/2
 Response body is the same as above.
 
 ### Accept Friendship
-- **POST** `/friendships/accept`
-- **Request body**:
-```json
-{"user1Id": 1, "user2Id": 2}
-```
-- **Curl**:
+- **POST** `/friendships/{user1Id}/{user2Id}/accept`
 ```bash
-curl -X POST http://localhost:8080/friendships/accept \
-  -H 'Content-Type: application/json' \
-  -d '{"user1Id":1,"user2Id":2}'
+curl -X POST http://localhost:8080/friendships/1/2/accept
 ```
 - **Response**: updated `Friendship`.
 
 ### Reject Friendship
-- **POST** `/friendships/reject`
-- **Request body**:
-```json
-{"user1Id": 1, "user2Id": 2}
-```
-- **Curl**:
+- **POST** `/friendships/{user1Id}/{user2Id}/reject`
 ```bash
-curl -X POST http://localhost:8080/friendships/reject \
-  -H 'Content-Type: application/json' \
-  -d '{"user1Id":1,"user2Id":2}'
+curl -X POST http://localhost:8080/friendships/1/2/reject
 ```
-- **Response**: updated `Friendship`.
+- **Response**: `200 OK` with empty body.
 
 ### Pending Friendships
 - **GET** `/friendships/pending/{userId}`

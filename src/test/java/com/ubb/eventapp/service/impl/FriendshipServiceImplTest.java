@@ -44,18 +44,12 @@ public class FriendshipServiceImplTest {
     }
 
     @Test
-    void rejectFriendship_setsStateToBlockedAndSaves() {
+    void rejectFriendship_deletesRequest() {
         FriendshipId id = new FriendshipId(1L, 2L);
-        Friendship friendship = Friendship.builder().id(id).estado(FriendshipState.PENDIENTE).build();
-        when(friendshipRepository.findById(id)).thenReturn(Optional.of(friendship));
-        when(friendshipRepository.save(any(Friendship.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        Friendship result = service.rejectFriendship(id);
+        service.rejectFriendship(id);
 
-        assertEquals(FriendshipState.BLOQUEADA, result.getEstado());
-        ArgumentCaptor<Friendship> captor = ArgumentCaptor.forClass(Friendship.class);
-        verify(friendshipRepository).save(captor.capture());
-        assertEquals(FriendshipState.BLOQUEADA, captor.getValue().getEstado());
+        verify(friendshipRepository).deleteById(id);
     }
 
     @Test
