@@ -244,6 +244,15 @@ Response example:
 {"id":{"user1Id":1,"user2Id":2},"estado":"PENDIENTE"}
 ```
 
+You can also send the user ids as path parameters:
+
+### `POST /friendships/{user1Id}/{user2Id}`
+
+```bash
+curl -X POST "$BASE_URL/friendships/1/2"
+```
+Response example is identical to the body-based variant.
+
 ### `POST /friendships/accept`
 Accepts a friendship.
 
