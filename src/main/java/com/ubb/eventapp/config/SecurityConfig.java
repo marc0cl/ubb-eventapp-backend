@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfigurationSource;
+import com.ubb.eventapp.config.AlwaysCorsFilter;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -21,6 +22,7 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final LogoutService logoutService;
     private final CorsConfigurationSource corsConfigurationSource;
+    private final AlwaysCorsFilter alwaysCorsFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -39,6 +41,7 @@ public class SecurityConfig {
                         .logoutUrl("/auth/logout")
                         .logoutSuccessHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_OK)))
                 .authenticationProvider(authenticationProvider)
+                .addFilterBefore(alwaysCorsFilter, JwtAuthFilter.class)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
