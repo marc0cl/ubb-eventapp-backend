@@ -15,6 +15,9 @@ A Postman collection with all endpoints is provided under the `postman` folder. 
 
 Defaults are provided for local development if not set.
 
+## CORS
+Cross-origin requests are allowed only from `http://146.83.198.35:1404`.
+
 ## Building & Testing
 Run the Maven build and tests using:
 
