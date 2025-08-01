@@ -41,8 +41,8 @@ public class SecurityConfig {
                         .logoutUrl("/auth/logout")
                         .logoutSuccessHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_OK)))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(alwaysCorsFilter, JwtAuthFilter.class)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(alwaysCorsFilter, JwtAuthFilter.class);
 
         return http.build();
     }
